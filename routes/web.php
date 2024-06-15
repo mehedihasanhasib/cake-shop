@@ -1,15 +1,15 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CakeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ShopController;
-use Illuminate\Support\Facades\Route;
 
-
+//home page
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
-// shop page
-Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
+
+Route::resource('/cake', CakeController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

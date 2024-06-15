@@ -76,8 +76,8 @@
                     <ul>
                         <li class={{ Route::is('home.index') ? 'active' : null }}><a
                                 href="{{ route('home.index') }}">Home</a></li>
-                        <li class={{ Route::is('shop.index') ? 'active' : null }}><a
-                                href="{{ route('shop.index') }}">Shop</a></li>
+                        <li class={{ Route::is('cake.index') ? 'active' : null }}><a
+                                href="{{ route('cake.index') }}">Shop</a></li>
                         <li><a href="{{ asset('users/about.html') }}">About</a></li>
                         <li><a href="{{ asset('users/contact.html') }}">Contact</a></li>
                     </ul>
