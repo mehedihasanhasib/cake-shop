@@ -1,6 +1,37 @@
 @extends('layouts.app')
 
 @section('content')
+    <!-- Offcanvas Menu Begin -->
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div class="offcanvas__cart">
+            {{-- <div class="offcanvas__cart__links">
+                <a href="{{ asset('users/#') }}" class="search-switch"><img src="{{ asset('users/img/icon/search.png') }}"
+                        alt=""></a>
+                <a href="{{ asset('users/#') }}"><img src="{{ asset('users/img/icon/heart.png') }}" alt=""></a>
+            </div> --}}
+            <div class="offcanvas__cart__item">
+                <a href="{{ asset('users/#') }}"><img src="{{ asset('users/img/icon/cart.png') }}" alt="">
+                    <span>0</span></a>
+                <div class="cart__price">Cart: <span>$0.00</span></div>
+            </div>
+        </div>
+        <div class="offcanvas__logo">
+            <a href="{{ asset('users/index.html') }}"><img src="{{ asset('users/img/logo.png') }}" alt=""></a>
+        </div>
+        <div id="mobile-menu-wrap"></div>
+        <div class="offcanvas__option">
+            <ul>
+                <li>
+                    <a href="">Sign in</a>
+                </li>
+                <li>
+                    <a href="">Sign in</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- Offcanvas Menu End -->
     <!-- Header Section Begin -->
     <header class="header">
         <div class="header__top">
@@ -10,19 +41,11 @@
                         <div class="header__top__inner">
                             <div class="header__top__left">
                                 <ul>
-                                    <li>USD <span class="arrow_carrot-down"></span>
-                                        <ul>
-                                            <li>EUR</li>
-                                            <li>USD</li>
-                                        </ul>
+                                    <li>
+                                        <a href="#">Sign in</a>
                                     </li>
-                                    <li>ENG <span class="arrow_carrot-down"></span>
-                                        <ul>
-                                            <li>Spanish</li>
-                                            <li>ENG</li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="{{ asset('users/#') }}">Sign in</a> <span class="arrow_carrot-down"></span>
+                                    <li>
+                                        <a href="#">Sign Up</a>
                                     </li>
                                 </ul>
                             </div>
@@ -31,12 +54,12 @@
                                         alt=""></a>
                             </div>
                             <div class="header__top__right">
-                                <div class="header__top__right__links">
+                                {{-- <div class="header__top__right__links">
                                     <a href="{{ asset('users/#') }}" class="search-switch"><img
                                             src="{{ asset('users/img/icon/search.png') }}" alt=""></a>
                                     <a href="{{ asset('users/#') }}"><img src="{{ asset('users/img/icon/heart.png') }}"
                                             alt=""></a>
-                                </div>
+                                </div> --}}
                                 <div class="header__top__right__cart">
                                     <a href="{{ asset('users/#') }}"><img src="{{ asset('users/img/icon/cart.png') }}"
                                             alt=""> <span>0</span></a>
@@ -368,84 +391,7 @@
     </section>
     <!-- Class Section End -->
 
-    <!-- Team Section Begin -->
-    <section class="team spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-7 col-md-7 col-sm-7">
-                    <div class="section-title">
-                        <span>Our team</span>
-                        <h2>Sweet Baker</h2>
-                    </div>
-                </div>
-                <div class="col-lg-5 col-md-5 col-sm-5">
-                    <div class="team__btn">
-                        <a href="#" class="primary-btn">Join Us</a>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="team__item set-bg" data-setbg="{{ asset('users/img/team/team-1.jpg') }}">
-                        <div class="team__item__text">
-                            <h6>Randy Butler</h6>
-                            <span>Decorater</span>
-                            <div class="team__item__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                                <a href="#"><i class="fa fa-youtube-play"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="team__item set-bg" data-setbg="{{ asset('users/img/team/team-2.jpg') }}">
-                        <div class="team__item__text">
-                            <h6>Randy Butler</h6>
-                            <span>Decorater</span>
-                            <div class="team__item__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                                <a href="#"><i class="fa fa-youtube-play"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="team__item set-bg" data-setbg="{{ asset('users/img/team/team-3.jpg') }}">
-                        <div class="team__item__text">
-                            <h6>Randy Butler</h6>
-                            <span>Decorater</span>
-                            <div class="team__item__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                                <a href="#"><i class="fa fa-youtube-play"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="team__item set-bg" data-setbg="{{ asset('users/img/team/team-4.jpg') }}">
-                        <div class="team__item__text">
-                            <h6>Randy Butler</h6>
-                            <span>Decorater</span>
-                            <div class="team__item__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                                <a href="#"><i class="fa fa-youtube-play"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Team Section End -->
 
     <!-- Testimonial Section Begin -->
     <section class="testimonial spad">

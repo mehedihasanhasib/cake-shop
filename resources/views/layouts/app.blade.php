@@ -7,7 +7,7 @@
     <meta name="keywords" content="Cake, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cake | Template</title>
+    <title>Cake Shop</title>
 
     <!-- Google Font -->
     <link href="{{ asset('users/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
@@ -28,45 +28,7 @@
         <div class="loader"></div>
     </div>
 
-    <!-- Offcanvas Menu Begin -->
-    <div class="offcanvas-menu-overlay"></div>
-    <div class="offcanvas-menu-wrapper">
-        <div class="offcanvas__cart">
-            <div class="offcanvas__cart__links">
-                <a href="{{ asset('users/#') }}" class="search-switch"><img
-                        src="{{ asset('users/img/icon/search.png') }}" alt=""></a>
-                <a href="{{ asset('users/#') }}"><img src="{{ asset('users/img/icon/heart.png') }}"
-                        alt=""></a>
-            </div>
-            <div class="offcanvas__cart__item">
-                <a href="{{ asset('users/#') }}"><img src="{{ asset('users/img/icon/cart.png') }}" alt="">
-                    <span>0</span></a>
-                <div class="cart__price">Cart: <span>$0.00</span></div>
-            </div>
-        </div>
-        <div class="offcanvas__logo">
-            <a href="{{ asset('users/index.html') }}"><img src="{{ asset('users/img/logo.png') }}" alt=""></a>
-        </div>
-        <div id="mobile-menu-wrap"></div>
-        <div class="offcanvas__option">
-            <ul>
-                <li>USD <span class="arrow_carrot-down"></span>
-                    <ul>
-                        <li>EUR</li>
-                        <li>USD</li>
-                    </ul>
-                </li>
-                <li>ENG <span class="arrow_carrot-down"></span>
-                    <ul>
-                        <li>Spanish</li>
-                        <li>ENG</li>
-                    </ul>
-                </li>
-                <li><a href="{{ asset('users/#') }}">Sign in</a> <span class="arrow_carrot-down"></span></li>
-            </ul>
-        </div>
-    </div>
-    <!-- Offcanvas Menu End -->
+
 
     @yield('content')
 
@@ -113,31 +75,7 @@
                 </div>
             </div>
         </div>
-        <div class="copyright">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-7">
-                        <p class="copyright__text text-white">
-                            Copyright &copy;
-                            <script>
-                                document.write(new Date().getFullYear());
-                            </script> All rights reserved | This template is made with <i
-                                class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
-                                target="_blank">Colorlib</a>
-                        </p>
-                    </div>
-                    <div class="col-lg-5">
-                        <div class="copyright__widget">
-                            <ul>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Terms & Conditions</a></li>
-                                <li><a href="#">Site Map</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </footer>
     <!-- Footer Section End -->
 
