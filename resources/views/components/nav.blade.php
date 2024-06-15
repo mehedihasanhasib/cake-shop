@@ -14,16 +14,16 @@
         </div>
     </div>
     <div class="offcanvas__logo">
-        <a href="{{ asset('users/index.html') }}"><img src="{{ asset('users/img/logo.png') }}" alt=""></a>
+        <a href="{{ route('home.index') }}"><img src="{{ asset('users/img/logo.png') }}" alt=""></a>
     </div>
     <div id="mobile-menu-wrap"></div>
     <div class="offcanvas__option">
         <ul>
             <li>
-                <a href="">Sign in</a>
+                <a href="{{ route('login') }}">Sign in</a>
             </li>
             <li>
-                <a href="">Sign in</a>
+                <a href="{{ route('register') }}">Sign up</a>
             </li>
         </ul>
     </div>
@@ -39,10 +39,10 @@
                         <div class="header__top__left">
                             <ul>
                                 <li>
-                                    <a href="#">Sign in</a>
+                                    <a href="{{ route('login') }}">Sign in</a>
                                 </li>
                                 <li>
-                                    <a href="#">Sign Up</a>
+                                    <a href="{{ route('register') }}">Sign Up</a>
                                 </li>
                             </ul>
                         </div>
