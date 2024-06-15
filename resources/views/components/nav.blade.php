@@ -8,9 +8,9 @@
          <a href="{{ asset('users/#') }}"><img src="{{ asset('users/img/icon/heart.png') }}" alt=""></a>
      </div> --}}
         <div class="offcanvas__cart__item">
-            <a href="{{ asset('users/#') }}"><img src="{{ asset('users/img/icon/cart.png') }}" alt="">
+            <a href="{{ route('cart') }}"><img src="{{ asset('users/img/icon/cart.png') }}" alt="">
                 <span>0</span></a>
-            <div class="cart__price">Cart: <span>$0.00</span></div>
+            <div class="cart__price">Cart: <span> &#2547; 0.00</span></div>
         </div>
     </div>
     <div class="offcanvas__logo">
@@ -60,7 +60,7 @@
                             <div class="header__top__right__cart">
                                 <a href=""><img src="{{ asset('users/img/icon/cart.png') }}" alt="">
                                     <span>0</span></a>
-                                <div class="cart__price">Cart: <span>$0.00</span></div>
+                                <div class="cart__price">Cart: <span> &#2547; 0.00</span></div>
                             </div>
                         </div>
                     </div>
@@ -78,8 +78,8 @@
                                 href="{{ route('home.index') }}">Home</a></li>
                         <li class={{ Route::is('cake.index') ? 'active' : null }}><a
                                 href="{{ route('cake.index') }}">Shop</a></li>
-                        <li><a href="{{ asset('users/about.html') }}">About</a></li>
-                        <li><a href="{{ asset('users/contact.html') }}">Contact</a></li>
+                        <li><a href="{{ route('cart') }}">Cart</a></li>
+                        <li><a href="{{ route('contact') }}">Contact</a></li>
                     </ul>
                 </nav>
             </div>
