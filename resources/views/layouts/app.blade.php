@@ -27,7 +27,7 @@
     <div id="preloder">
         <div class="loader"></div>
     </div>
-
+    @include('components.nav')
 
 
     @yield('content')
