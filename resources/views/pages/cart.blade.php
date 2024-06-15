@@ -49,8 +49,12 @@
                                     </td>
                                     <td class="quantity__item">
                                         <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="1">
+                                            <div>
+                                                <button
+                                                    style="outline: none; border: 0px; background-color: transparent">-</button>
+                                                <span>0</span>
+                                                <button
+                                                    style="outline: none; border: 0px; background-color: transparent">+</button>
                                             </div>
                                         </div>
                                     </td>
@@ -69,8 +73,12 @@
                                     </td>
                                     <td class="quantity__item">
                                         <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="1">
+                                            <div>
+                                                <button
+                                                    style="outline: none; border: 0px; background-color: transparent">-</button>
+                                                <span>0</span>
+                                                <button
+                                                    style="outline: none; border: 0px; background-color: transparent">+</button>
                                             </div>
                                         </div>
                                     </td>
@@ -89,8 +97,12 @@
                                     </td>
                                     <td class="quantity__item">
                                         <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="1">
+                                            <div>
+                                                <button
+                                                    style="outline: none; border: 0px; background-color: transparent">-</button>
+                                                <span>0</span>
+                                                <button
+                                                    style="outline: none; border: 0px; background-color: transparent">+</button>
                                             </div>
                                         </div>
                                     </td>
@@ -109,8 +121,12 @@
                                     </td>
                                     <td class="quantity__item">
                                         <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="1">
+                                            <div>
+                                                <button
+                                                    style="outline: none; border: 0px; background-color: transparent">-</button>
+                                                <span>0</span>
+                                                <button
+                                                    style="outline: none; border: 0px; background-color: transparent">+</button>
                                             </div>
                                         </div>
                                     </td>

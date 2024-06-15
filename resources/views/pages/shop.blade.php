@@ -56,7 +56,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/shop/product-1.jpg">
+                        <div class="product__item__pic set-bg" data-setbg="{{ asset('users/img/shop/product-1.jpg') }}">
                             <div class="product__label">
                                 <span>Cupcake</span>
                             </div>
@@ -72,7 +72,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/shop/product-2.jpg">
+                        <div class="product__item__pic set-bg" data-setbg="{{ asset('users/img/shop/product-2.jpg') }}">
                             <div class="product__label">
                                 <span>Cupcake</span>
                             </div>
@@ -88,7 +88,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/shop/product-3.jpg">
+                        <div class="product__item__pic set-bg" data-setbg="{{ asset('users/img/shop/product-3.jpg') }}">
                             <div class="product__label">
                                 <span>Cupcake</span>
                             </div>
@@ -104,7 +104,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/shop/product-4.jpg">
+                        <div class="product__item__pic set-bg" data-setbg="{{ asset('users/img/shop/product-4.jpg') }}">
                             <div class="product__label">
                                 <span>Cupcake</span>
                             </div>
@@ -120,7 +120,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/shop/product-5.jpg">
+                        <div class="product__item__pic set-bg" data-setbg="{{ asset('users/img/shop/product-5.jpg') }}">
                             <div class="product__label">
                                 <span>Cupcake</span>
                             </div>
@@ -136,7 +136,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/shop/product-6.jpg">
+                        <div class="product__item__pic set-bg" data-setbg="{{ asset('users/img/shop/product-6.jpg') }}">
                             <div class="product__label">
                                 <span>Cupcake</span>
                             </div>
@@ -152,7 +152,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/shop/product-7.jpg">
+                        <div class="product__item__pic set-bg" data-setbg="{{ asset('users/img/shop/product-7.jpg') }}">
                             <div class="product__label">
                                 <span>Cupcake</span>
                             </div>
@@ -168,7 +168,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/shop/product-8.jpg">
+                        <div class="product__item__pic set-bg" data-setbg="{{ asset('users/img/shop/product-8.jpg') }}">
                             <div class="product__label">
                                 <span>Cupcake</span>
                             </div>
@@ -184,7 +184,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/shop/product-9.jpg">
+                        <div class="product__item__pic set-bg" data-setbg="{{ asset('users/img/shop/product-9.jpg') }}">
                             <div class="product__label">
                                 <span>Cupcake</span>
                             </div>
@@ -200,7 +200,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/shop/product-10.jpg">
+                        <div class="product__item__pic set-bg" data-setbg="{{ asset('users/img/shop/product-10.jpg') }}">
                             <div class="product__label">
                                 <span>Cupcake</span>
                             </div>
@@ -216,7 +216,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/shop/product-11.jpg">
+                        <div class="product__item__pic set-bg" data-setbg="{{ asset('users/img/shop/product-11.jpg') }}">
                             <div class="product__label">
                                 <span>Cupcake</span>
                             </div>
@@ -232,7 +232,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/shop/product-12.jpg">
+                        <div class="product__item__pic set-bg" data-setbg="{{ asset('users/img/shop/product-12.jpg') }}">
                             <div class="product__label">
                                 <span>Cupcake</span>
                             </div>

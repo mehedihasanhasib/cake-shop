@@ -92,6 +92,8 @@
     </div>
     <!-- Search End -->
 
+    @yield('script')
+
     <!-- Js Plugins -->
     <script src="{{ asset('users/js/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('users/js/bootstrap.min.js') }}"></script>
@@ -102,6 +104,8 @@
     <script src="{{ asset('users/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('users/js/jquery.nicescroll.min.js') }}"></script>
     <script src="{{ asset('users/js/main.js') }}"></script>
+
+
 </body>
 
 </html>
