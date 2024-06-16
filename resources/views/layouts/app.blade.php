@@ -9,6 +9,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Cake Shop</title>
 
+    <link rel="icon" href="{{ asset('favicon.png') }}" type="image/x-icon" />
+
     <!-- Google Font -->
     <link href="{{ asset('users/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('users/css/flaticon.css') }}" rel="stylesheet" type="text/css">
