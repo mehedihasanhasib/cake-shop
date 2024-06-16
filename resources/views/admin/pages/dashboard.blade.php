@@ -156,16 +156,16 @@
 @section('script')
     <script>
         $.notify({
-            icon: 'fa fa-times-circle', // Font Awesome icon class
-            title: 'Error!',
-            message: 'Your operation was unsuccessful.',
+            icon: 'fa fa-check-circle',
+            title: 'Success',
+            message: 'Premium Bootstrap 5 Admin Dashboard',
         }, {
-            type: 'danger', // Bootstrap alert class for success
+            type: 'success',
             placement: {
-                from: "top",
+                from: "bottom",
                 align: "right"
             },
-            time: 3000, // 3 seconds
+            time: 2000,
         });
     </script>
 @endsection

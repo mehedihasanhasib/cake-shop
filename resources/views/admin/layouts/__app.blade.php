@@ -43,13 +43,13 @@
 <body>
     <div class="wrapper">
         <!-- Sidebar -->
-        <div class="sidebar sidebar-style-2" data-background-color="dark">
+        <div class="sidebar" data-background-color="dark">
             <div class="sidebar-logo">
                 <!-- Logo Header -->
                 <div class="logo-header" data-background-color="dark">
                     <a href="index.html" class="logo">
-                        <img src="assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand"
-                            height="20" />
+                        <img src="{{ asset('admin/assets/img/kaiadmin/logo_light.svg') }}" alt="navbar brand"
+                            class="navbar-brand" height="20" />
                     </a>
                     <div class="nav-toggle">
                         <button class="btn btn-toggle toggle-sidebar">
@@ -59,32 +59,31 @@
                             <i class="gg-menu-left"></i>
                         </button>
                     </div>
+                    <button class="topbar-toggler more">
+                        <i class="gg-more-vertical-alt"></i>
+                    </button>
                 </div>
                 <!-- End Logo Header -->
             </div>
             <div class="sidebar-wrapper scrollbar scrollbar-inner">
                 <div class="sidebar-content">
-                    <div class="user-box mt-3">
-                        <div class="avatar-lg d-flex">
-                            <img src="assets/img/profile.jpg" alt="image profile" class="avatar-img rounded" />
-                        </div>
-
-                        <div class="u-text">
-                            <h4>Hizrian</h4>
-                            <a href="" class="btn btn-xs btn-secondary btn-sm">Logout</a>
-                        </div>
-                    </div>
                     <ul class="nav nav-secondary">
-                        <li class="nav-item {{ Route::is('admin.dashboard') ? 'active' : null }}">
+                        <li class="nav-item active">
                             <a>
                                 <i class="fas fa-home"></i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
-                        <li class="nav-item {{ Route::is('admin.cakes') ? 'active' : null }}">
+                        <li class="nav-item">
                             <a>
-                                <i class="fas fa-birthday-cake"></i>
-                                <p>Cakes</p>
+                                <i class="fas fa-home"></i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a>
+                                <i class="fas fa-home"></i>
+                                <p>Dashboard</p>
                             </a>
                         </li>
                     </ul>
@@ -219,8 +218,7 @@
                                                     <h4>Hizrian</h4>
                                                     <p class="text-muted">hello@example.com</p>
                                                     <a href="profile.html"
-                                                        class="btn btn-xs btn-secondary btn-sm">View
-                                                        Profile</a>
+                                                        class="btn btn-xs btn-secondary btn-sm">View Profile</a>
                                                 </div>
                                             </div>
                                         </li>
@@ -242,75 +240,76 @@
 
             @yield('content')
         </div>
+    </div>
 
 
-        <!--   Core JS Files   -->
-        <script src="{{ asset('admin/assets/js/core/jquery-3.7.1.min.js') }}"></script>
-        <script src="{{ asset('admin/assets/js/core/popper.min.js') }}"></script>
-        <script src="{{ asset('admin/assets/js/core/bootstrap.min.js') }}"></script>
+    <!--   Core JS Files   -->
+    <script src="{{ asset('admin/assets/js/core/jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/js/core/popper.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/js/core/bootstrap.min.js') }}"></script>
 
-        <!-- jQuery Scrollbar -->
-        <script src="{{ asset('admin/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
+    <!-- jQuery Scrollbar -->
+    <script src="{{ asset('admin/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
 
-        <!-- Chart JS -->
-        <script src="{{ asset('admin/assets/js/plugin/chart.js/chart.min.js') }}"></script>
+    <!-- Chart JS -->
+    <script src="{{ asset('admin/assets/js/plugin/chart.js/chart.min.js') }}"></script>
 
-        <!-- jQuery Sparkline -->
-        <script src="{{ asset('admin/assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js') }}"></script>
+    <!-- jQuery Sparkline -->
+    <script src="{{ asset('admin/assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js') }}"></script>
 
-        <!-- Chart Circle -->
-        <script src="{{ asset('admin/assets/js/plugin/chart-circle/circles.min.js') }}"></script>
+    <!-- Chart Circle -->
+    <script src="{{ asset('admin/assets/js/plugin/chart-circle/circles.min.js') }}"></script>
 
-        <!-- Datatables -->
-        <script src="{{ asset('admin/assets/js/plugin/datatables/datatables.min.js') }}"></script>
+    <!-- Datatables -->
+    <script src="{{ asset('admin/assets/js/plugin/datatables/datatables.min.js') }}"></script>
 
-        <!-- Bootstrap Notify -->
-        <script src="{{ asset('admin/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
+    <!-- Bootstrap Notify -->
+    <script src="{{ asset('admin/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
 
-        <!-- jQuery Vector Maps -->
-        <script src="{{ asset('admin/assets/js/plugin/jsvectormap/jsvectormap.min.js') }}"></script>
-        <script src="{{ asset('admin/assets/js/plugin/jsvectormap/world.js') }}"></script>
+    <!-- jQuery Vector Maps -->
+    <script src="{{ asset('admin/assets/js/plugin/jsvectormap/jsvectormap.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/js/plugin/jsvectormap/world.js') }}"></script>
 
-        <!-- Sweet Alert -->
-        <script src="{{ asset('admin/assets/js/plugin/sweetalert/sweetalert.min.js') }}"></script>
+    <!-- Sweet Alert -->
+    <script src="{{ asset('admin/assets/js/plugin/sweetalert/sweetalert.min.js') }}"></script>
 
-        <!-- Kaiadmin JS -->
-        <script src="{{ asset('admin/assets/js/kaiadmin.min.js') }}"></script>
+    <!-- Kaiadmin JS -->
+    <script src="{{ asset('admin/assets/js/kaiadmin.min.js') }}"></script>
 
-        <!-- Kaiadmin DEMO methods, don't include it in your project! -->
-        <script src="{{ asset('admin/assets/js/setting-demo.js') }}"></script>
-        <script src="{{ asset('admin/assets/js/demo.js') }}"></script>
+    <!-- Kaiadmin DEMO methods, don't include it in your project! -->
+    <script src="{{ asset('admin/assets/js/setting-demo.js') }}"></script>
+    <script src="{{ asset('admin/assets/js/demo.js') }}"></script>
 
-        <script>
-            $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
-                type: "line",
-                height: "70",
-                width: "100%",
-                lineWidth: "2",
-                lineColor: "#177dff",
-                fillColor: "rgba(23, 125, 255, 0.14)",
-            });
+    <script>
+        $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
+            type: "line",
+            height: "70",
+            width: "100%",
+            lineWidth: "2",
+            lineColor: "#177dff",
+            fillColor: "rgba(23, 125, 255, 0.14)",
+        });
 
-            $("#lineChart2").sparkline([99, 125, 122, 105, 110, 124, 115], {
-                type: "line",
-                height: "70",
-                width: "100%",
-                lineWidth: "2",
-                lineColor: "#f3545d",
-                fillColor: "rgba(243, 84, 93, .14)",
-            });
+        $("#lineChart2").sparkline([99, 125, 122, 105, 110, 124, 115], {
+            type: "line",
+            height: "70",
+            width: "100%",
+            lineWidth: "2",
+            lineColor: "#f3545d",
+            fillColor: "rgba(243, 84, 93, .14)",
+        });
 
-            $("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
-                type: "line",
-                height: "70",
-                width: "100%",
-                lineWidth: "2",
-                lineColor: "#ffa534",
-                fillColor: "rgba(255, 165, 52, .14)",
-            });
-        </script>
+        $("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
+            type: "line",
+            height: "70",
+            width: "100%",
+            lineWidth: "2",
+            lineColor: "#ffa534",
+            fillColor: "rgba(255, 165, 52, .14)",
+        });
+    </script>
 
-        @yield('script')
+    @yield('script')
 </body>
 
 </html>

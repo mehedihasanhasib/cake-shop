@@ -7,9 +7,12 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 
-//home page
+//home
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
-Route::resource('/cake', CakeController::class);
+Route::get('/shop', [HomeController::class, 'shop'])->name('shop');
+Route::get('/cake-details/{id}', [HomeController::class, 'singleCake'])->name('shop.details');
+
+// contact
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 

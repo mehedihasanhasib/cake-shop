@@ -76,8 +76,8 @@
                     <ul>
                         <li class={{ Route::is('home.index') ? 'active' : null }}><a
                                 href="{{ route('home.index') }}">Home</a></li>
-                        <li class={{ Route::is('cake.index') ? 'active' : null }}><a
-                                href="{{ route('cake.index') }}">Shop</a></li>
+                        <li class={{ Route::is('shop') ? 'active' : null }}><a href="{{ route('shop') }}">Shop</a>
+                        </li>
                         <li class={{ Route::is('cart') ? 'active' : null }}><a href="{{ route('cart') }}">Cart</a>
                         </li>
                         <li class={{ Route::is('contact') ? 'active' : null }}><a

@@ -10,4 +10,14 @@ class HomeController extends Controller
     {
         return view('pages.index');
     }
+
+    public function shop()
+    {
+        return view('pages.shop');
+    }
+
+    public function singleCake(string $id)
+    {
+        return view('pages.singleCake');
+    }
 }

@@ -62,7 +62,7 @@
                             </div>
                         </div>
                         <div class="product__item__text">
-                            <h6><a href="{{ route('cake.show', ['cake' => 1]) }}">Dozen Cupcakes</a></h6>
+                            <h6><a href="{{ route('shop.details', ['id' => 1]) }}">Dozen Cupcakes</a></h6>
                             <div class="product__item__price">$32.00</div>
                             <div class="cart_add">
                                 <a href="#">Add to cart</a>

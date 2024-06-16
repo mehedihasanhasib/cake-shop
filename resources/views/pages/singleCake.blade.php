@@ -13,7 +13,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="breadcrumb__links">
                         <a href="{{ route('home.index') }}">Home</a>
-                        <a href="{{ route('cake.index') }}">Shop</a>
+                        <a href="{{ route('shop') }}">Shop</a>
                         <span>Sweet autumn leaves</span>
                     </div>
                 </div>
