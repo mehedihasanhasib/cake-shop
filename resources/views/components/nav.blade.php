@@ -78,8 +78,10 @@
                                 href="{{ route('home.index') }}">Home</a></li>
                         <li class={{ Route::is('cake.index') ? 'active' : null }}><a
                                 href="{{ route('cake.index') }}">Shop</a></li>
-                        <li><a href="{{ route('cart') }}">Cart</a></li>
-                        <li><a href="{{ route('contact') }}">Contact</a></li>
+                        <li class={{ Route::is('cart') ? 'active' : null }}><a href="{{ route('cart') }}">Cart</a>
+                        </li>
+                        <li class={{ Route::is('contact') ? 'active' : null }}><a
+                                href="{{ route('contact') }}">Contact</a></li>
                     </ul>
                 </nav>
             </div>
