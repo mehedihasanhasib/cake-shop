@@ -68,15 +68,18 @@
                             <li>Category: <span>Biscuit cake</span></li>
                             <li>Tags: <span>Gadgets, minimalisstic</span></li>
                         </ul>
-                        <div class="product__details__option">
-                            <div class="quantity">
-                                <div class="pro-qty">
-                                    <input type="text" value="2">
+                        <form action="#" class="product__details__option"
+                            style="display: flex !important; align-items: center !important; gap: 8px;">
+                            <div>
+                                <div>
+                                    <input class="form-control" type="number" value="1" min="1"
+                                            style="width: 80px">
                                 </div>
                             </div>
-                            <a href="#" class="primary-btn">Add to cart</a>
-                            <a href="#" class="heart__btn"><span class="icon_heart_alt"></span></a>
-                        </div>
+                            <div> <button type="submit" class="primary-btn rounded" style="outline: none; border: 0px;">Add
+                                    to
+                                    cart</button></div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -85,12 +88,6 @@
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Description</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Additional information</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Previews(1)</a>
                         </li>
                     </ul>
                     <div class="tab-content">
@@ -104,28 +101,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane" id="tabs-2" role="tabpanel">
-                            <div class="row d-flex justify-content-center">
-                                <div class="col-lg-8">
-                                    <p>This delectable Strawberry Pie is an extraordinary treat filled with sweet and
-                                        tasty chunks of delicious strawberries. Made with the freshest ingredients, one
-                                        bite will send you to summertime. Each gift arrives in an elegant gift box and
-                                        arrives with a greeting card of your choice that you can personalize online!2
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane" id="tabs-3" role="tabpanel">
-                            <div class="row d-flex justify-content-center">
-                                <div class="col-lg-8">
-                                    <p>This delectable Strawberry Pie is an extraordinary treat filled with sweet and
-                                        tasty chunks of delicious strawberries. Made with the freshest ingredients, one
-                                        bite will send you to summertime. Each gift arrives in an elegant gift box and
-                                        arrives with a greeting card of your choice that you can personalize online!3
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -147,7 +123,8 @@
                 <div class="related__products__slider owl-carousel">
                     <div class="col-lg-3">
                         <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="img/shop/product-1.jpg">
+                            <div class="product__item__pic set-bg"
+                                data-setbg="{{ asset('users/img/shop/product-1.jpg') }}">
                                 <div class="product__label">
                                     <span>Cupcake</span>
                                 </div>
@@ -163,7 +140,8 @@
                     </div>
                     <div class="col-lg-3">
                         <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="img/shop/product-2.jpg">
+                            <div class="product__item__pic set-bg"
+                                data-setbg="{{ asset('users/img/shop/product-2.jpg') }}">
                                 <div class="product__label">
                                     <span>Cupcake</span>
                                 </div>
@@ -179,7 +157,8 @@
                     </div>
                     <div class="col-lg-3">
                         <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="img/shop/product-3.jpg">
+                            <div class="product__item__pic set-bg"
+                                data-setbg="{{ asset('users/img/shop/product-3.jpg') }}">
                                 <div class="product__label">
                                     <span>Cupcake</span>
                                 </div>
@@ -195,7 +174,8 @@
                     </div>
                     <div class="col-lg-3">
                         <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="img/shop/product-4.jpg">
+                            <div class="product__item__pic set-bg"
+                                data-setbg="{{ asset('users/img/shop/product-4.jpg') }}">
                                 <div class="product__label">
                                     <span>Cupcake</span>
                                 </div>
@@ -211,7 +191,8 @@
                     </div>
                     <div class="col-lg-3">
                         <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="img/shop/product-5.jpg">
+                            <div class="product__item__pic set-bg"
+                                data-setbg="{{ asset('users/img/shop/product-5.jpg') }}">
                                 <div class="product__label">
                                     <span>Cupcake</span>
                                 </div>
@@ -227,7 +208,8 @@
                     </div>
                     <div class="col-lg-3">
                         <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="img/shop/product-6.jpg">
+                            <div class="product__item__pic set-bg"
+                                data-setbg="{{ asset('users/img/shop/product-6.jpg') }}">
                                 <div class="product__label">
                                     <span>Cupcake</span>
                                 </div>

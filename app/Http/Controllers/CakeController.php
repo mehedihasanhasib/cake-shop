@@ -11,7 +11,7 @@ class CakeController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.pages.cakes');
     }
 
     /**

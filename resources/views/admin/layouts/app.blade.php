@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Dahboard | Cake Shop</title>
+    <title>{{ $title }} | Cake Shop</title>
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
     <link rel="icon" href="{{ asset('favicon.png') }}" type="image/x-icon" />
 
@@ -64,30 +64,31 @@
             </div>
             <div class="sidebar-wrapper scrollbar scrollbar-inner">
                 <div class="sidebar-content">
-                    <div class="user-box mt-3">
-                        <div class="avatar-lg d-flex">
-                            <img src="assets/img/profile.jpg" alt="image profile" class="avatar-img rounded" />
-                        </div>
+                    {{-- <div class="user-box mt-3">
+                            <div class="avatar-lg d-flex">
+                                <img src="assets/img/profile.jpg" alt="image profile" class="avatar-img rounded" />
+                            </div>
 
-                        <div class="u-text">
-                            <h4>Hizrian</h4>
-                            <a href="" class="btn btn-xs btn-secondary btn-sm">Logout</a>
-                        </div>
-                    </div>
+                            <div class="u-text">
+                                <h4>Hizrian</h4>
+                                <a href="" class="btn btn-xs btn-secondary btn-sm">Logout</a>
+                            </div>
+                        </div> --}}
                     <ul class="nav nav-secondary">
                         <li class="nav-item {{ Route::is('admin.dashboard') ? 'active' : null }}">
-                            <a>
+                            <a href="{{ route('admin.dashboard') }}">
                                 <i class="fas fa-home"></i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
-                        <li class="nav-item {{ Route::is('admin.cakes') ? 'active' : null }}">
-                            <a>
+                        <li class="nav-item {{ Route::is('cakes.index') ? 'active' : null }}">
+                            <a href="{{ route('cakes.index') }}">
                                 <i class="fas fa-birthday-cake"></i>
                                 <p>Cakes</p>
                             </a>
                         </li>
                     </ul>
+
                 </div>
             </div>
         </div>
@@ -280,6 +281,7 @@
         <!-- Kaiadmin DEMO methods, don't include it in your project! -->
         <script src="{{ asset('admin/assets/js/setting-demo.js') }}"></script>
         <script src="{{ asset('admin/assets/js/demo.js') }}"></script>
+        <script src="{{ asset('admin/assets/js/setting-demo2.js') }}"></script>
 
         <script>
             $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {

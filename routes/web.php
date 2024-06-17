@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CakeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
@@ -15,10 +14,6 @@ Route::get('/cake-details/{id}', [HomeController::class, 'singleCake'])->name('s
 // contact
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
