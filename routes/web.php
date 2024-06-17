@@ -15,6 +15,10 @@ Route::get('/cake-details/{id}', [HomeController::class, 'singleCake'])->name('s
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 
+Route::post('/test', function (\Illuminate\Http\Request $request) {
+    dd($request->all());
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -27,7 +27,8 @@
                                                 <span class="fw-mediumbold"> New</span>
                                                 <span class="fw-light"> Row </span>
                                             </h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <button type="button" class="close" data-bs-dismiss="modal"
+                                                aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
@@ -36,7 +37,8 @@
                                                 Create a new row using this form, make sure you
                                                 fill them all
                                             </p>
-                                            <form>
+                                            <form id="createCake" action="{{ url('test') }}" method="POST">
+                                                @csrf
                                                 <div class="row">
                                                     <div class="col-sm-12">
                                                         <div class="form-group form-group-default">
@@ -66,7 +68,7 @@
                                             <button type="button" id="addRowButton" class="btn btn-primary">
                                                 Add
                                             </button>
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                                                 Close
                                             </button>
                                         </div>
@@ -84,14 +86,7 @@
                                             <th style="width: 10%">Action</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </tfoot>
+
                                     <tbody>
                                         <tr>
                                             <td>Tiger Nixon</td>
@@ -300,58 +295,27 @@
     <script src="../assets/js/setting-demo2.js"></script>
     <script>
         $(document).ready(function() {
-            $("#basic-datatables").DataTable({});
 
-            $("#multi-filter-select").DataTable({
-                pageLength: 5,
-                initComplete: function() {
-                    this.api()
-                        .columns()
-                        .every(function() {
-                            var column = this;
-                            var select = $(
-                                    '<select class="form-select"><option value=""></option></select>'
-                                )
-                                .appendTo($(column.footer()).empty())
-                                .on("change", function() {
-                                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
-
-                                    column
-                                        .search(val ? "^" + val + "$" : "", true, false)
-                                        .draw();
-                                });
-
-                            column
-                                .data()
-                                .unique()
-                                .sort()
-                                .each(function(d, j) {
-                                    select.append(
-                                        '<option value="' + d + '">' + d + "</option>"
-                                    );
-                                });
-                        });
-                },
-            });
 
             // Add Row
             $("#add-row").DataTable({
                 pageLength: 5,
             });
 
-            var action =
-                '<td> <div class="form-button-action"> <button type="button" data-bs-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-bs-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
+            // var action =
+            //     '<td> <div class="form-button-action"> <button type="button" data-bs-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-bs-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
 
             $("#addRowButton").click(function() {
-                $("#add-row")
-                    .dataTable()
-                    .fnAddData([
-                        $("#addName").val(),
-                        $("#addPosition").val(),
-                        $("#addOffice").val(),
-                        action,
-                    ]);
-                $("#addRowModal").modal("hide");
+                // $("#add-row")
+                //     .dataTable()
+                //     .fnAddData([
+                //         $("#addName").val(),
+                //         $("#addPosition").val(),
+                //         $("#addOffice").val(),
+                //         action,
+                //     ]);
+                // $("#addRowModal").modal("hide");
+                $('#createCake').submit();
             });
         });
     </script>
