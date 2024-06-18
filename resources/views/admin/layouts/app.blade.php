@@ -47,7 +47,7 @@
             <div class="sidebar-logo">
                 <!-- Logo Header -->
                 <div class="logo-header" data-background-color="dark">
-                    <a href="index.html" class="logo">
+                    <a href="{{ route('admin.dashboard') }}" class="logo">
                         <img src="assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand"
                             height="20" />
                     </a>
@@ -64,16 +64,16 @@
             </div>
             <div class="sidebar-wrapper scrollbar scrollbar-inner">
                 <div class="sidebar-content">
-                    {{-- <div class="user-box mt-3">
-                            <div class="avatar-lg d-flex">
-                                <img src="assets/img/profile.jpg" alt="image profile" class="avatar-img rounded" />
-                            </div>
+                    <div class="user-box mt-3">
+                        <div class="avatar-lg d-flex">
+                            <img src="assets/img/profile.jpg" alt="image profile" class="avatar-img rounded" />
+                        </div>
 
-                            <div class="u-text">
-                                <h4>Hizrian</h4>
-                                <a href="" class="btn btn-xs btn-secondary btn-sm">Logout</a>
-                            </div>
-                        </div> --}}
+                        <div class="u-text">
+                            <h4>Hizrian</h4>
+                            <a href="" class="btn btn-xs btn-secondary btn-sm">Logout</a>
+                        </div>
+                    </div>
                     <ul class="nav nav-secondary">
                         <li class="nav-item {{ Route::is('admin.dashboard') ? 'active' : null }}">
                             <a href="{{ route('admin.dashboard') }}">
@@ -85,6 +85,12 @@
                             <a href="{{ route('cakes.index') }}">
                                 <i class="fas fa-birthday-cake"></i>
                                 <p>Cakes</p>
+                            </a>
+                        </li>
+                        <li class="nav-item {{ Route::is('variants.index') ? 'active' : null }}">
+                            <a href="{{ route('variants.index') }}">
+                                <i class="fas fa-birthday-cake"></i>
+                                <p>Variants</p>
                             </a>
                         </li>
                     </ul>
@@ -99,7 +105,7 @@
                 <div class="main-header-logo">
                     <!-- Logo Header -->
                     <div class="logo-header" data-background-color="dark">
-                        <a href="index.html" class="logo">
+                        <a href="{{ route('admin.dashboard') }}" class="logo">
                             <img src="assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand"
                                 height="20" />
                         </a>

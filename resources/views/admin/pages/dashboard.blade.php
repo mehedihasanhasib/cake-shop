@@ -95,7 +95,7 @@
                         <div class="card-header">
                             <div class="card-head-row">
                                 <div class="card-title">User Statistics</div>
-                                <div class="card-tools">
+                                {{-- <div class="card-tools">
                                     <a href="#" class="btn btn-label-success btn-round btn-sm me-2">
                                         <span class="btn-label">
                                             <i class="fa fa-pencil"></i>
@@ -108,7 +108,7 @@
                                         </span>
                                         Print
                                     </a>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <div class="card-body">
@@ -154,7 +154,7 @@
 @endsection
 
 @section('script')
-    <script>
+    {{-- <script>
         $.notify({
             icon: 'fa fa-check-circle',
             title: 'Success',
@@ -167,5 +167,5 @@
             },
             time: 2000,
         });
-    </script>
+    </script> --}}
 @endsection
