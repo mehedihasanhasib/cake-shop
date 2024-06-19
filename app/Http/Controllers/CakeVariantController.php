@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CakeVariant;
 use Illuminate\Http\Request;
 
 class CakeVariantController extends Controller
@@ -11,7 +12,11 @@ class CakeVariantController extends Controller
      */
     public function index()
     {
-        return view('admin.pages.cakeVariants');
+        $variants = CakeVariant::all();
+
+        return view('admin.pages.cakeVariants', [
+            'variants' => $variants
+        ]);
     }
 
     /**
