@@ -33,10 +33,9 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <p class="small">
-                                                Create a new row using this form, make sure you
-                                                fill them all
-                                            </p>
+                                            <h3 style="margin-left: 3px" class="small">
+                                                Create a new Variant
+                                            </h3>
                                             {{-- add variant form --}}
                                             <form id="createCake" action="{{ route('variants.store') }}" method="POST">
                                                 @csrf
@@ -75,7 +74,9 @@
                                         @foreach ($variants as $key => $variant)
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
-                                                <td style="text-align: center">{{ $variant->variant_name }}</td>
+                                                <td style="text-align: center">
+                                                    {{ ucfirst(trans(strtolower($variant->variant_name))) }}
+                                                </td>
                                                 <td>
                                                     <div class="form-button-action">
                                                         <button type="button" data-bs-toggle="tooltip" title=""
@@ -119,9 +120,9 @@
     <script>
         $(document).ready(function() {
             // Add Row
-            //$("#add-row").DataTable({
-            //  pageLength: 5,
-            //});
+            $("#add-row").DataTable({
+                pageLength: 5,
+            });
 
             $("#addRowButton").click(function() {
                 $('#createCake').submit();
