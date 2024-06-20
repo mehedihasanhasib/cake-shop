@@ -9,4 +9,7 @@ class CakeVariant extends Model
 {
     use HasFactory;
     protected $table = "cake_variants";
+    protected $fillable = [
+        'variant_name'
+    ];
 }

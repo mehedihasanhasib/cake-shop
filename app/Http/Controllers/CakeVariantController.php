@@ -32,7 +32,22 @@ class CakeVariantController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated_data = $request->validate(
+            [
+                'variant_name' => 'required|string|max:255'
+            ],
+            [
+                'variant_name.required' => 'Variant field can\'t be null'
+            ]
+        );
+
+        try {
+            CakeVariant::create($validated_data);
+
+            return back()->with('success', 'Variant add successful');
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
+        }
     }
 
     /**

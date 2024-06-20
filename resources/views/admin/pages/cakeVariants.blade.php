@@ -37,32 +37,18 @@
                                                 Create a new row using this form, make sure you
                                                 fill them all
                                             </p>
-                                            <form id="createCake" action="{{ url('test') }}" method="POST">
+                                            {{-- add variant form --}}
+                                            <form id="createCake" action="{{ route('variants.store') }}" method="POST">
                                                 @csrf
                                                 <div class="row">
                                                     <div class="col-sm-12">
-                                                        <div class="form-group form-group-default">
-                                                            <label>Name</label>
-                                                            <input id="addName" type="text" class="form-control"
-                                                                placeholder="fill name" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6 pe-0">
-                                                        <div class="form-group form-group-default">
-                                                            <label>Position</label>
-                                                            <input id="addPosition" type="text" class="form-control"
-                                                                placeholder="fill position" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group form-group-default">
-                                                            <label>Office</label>
-                                                            <input id="addOffice" type="text" class="form-control"
-                                                                placeholder="fill office" />
-                                                        </div>
+                                                        <input class="form-control form-control-lg" type="text"
+                                                            placeholder="Variant Name" aria-label="Variant Name"
+                                                            name="variant_name">
                                                     </div>
                                                 </div>
                                             </form>
+                                            {{-- ******** --}}
                                         </div>
                                         <div class="modal-footer border-0">
                                             <button type="button" id="addRowButton" class="btn btn-primary">
@@ -80,14 +66,16 @@
                                 <table id="add-row" class="display table table-striped table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th style="width: 10%">Action</th>
+                                            <th style="width: 3vw">SL</th>
+                                            <th style="text-align: center">Name</th>
+                                            <th style="width: 10%; text-align: center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($variants as $key => $variant)
                                             <tr>
-                                                <td>{{ $variant->variant_name }}</td>
+                                                <td>{{ $key + 1 }}</td>
+                                                <td style="text-align: center">{{ $variant->variant_name }}</td>
                                                 <td>
                                                     <div class="form-button-action">
                                                         <button type="button" data-bs-toggle="tooltip" title=""
@@ -130,28 +118,47 @@
     <script src="../assets/js/setting-demo2.js"></script>
     <script>
         $(document).ready(function() {
-
-
             // Add Row
-            $("#add-row").DataTable({
-                pageLength: 5,
-            });
-
-            // var action =
-            //     '<td> <div class="form-button-action"> <button type="button" data-bs-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-bs-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
+            //$("#add-row").DataTable({
+            //  pageLength: 5,
+            //});
 
             $("#addRowButton").click(function() {
-                // $("#add-row")
-                //     .dataTable()
-                //     .fnAddData([
-                //         $("#addName").val(),
-                //         $("#addPosition").val(),
-                //         $("#addOffice").val(),
-                //         action,
-                //     ]);
-                // $("#addRowModal").modal("hide");
                 $('#createCake').submit();
             });
         });
     </script>
+
+    @error('variant_name')
+        <script>
+            $.notify({
+                icon: 'fa fa-times-circle',
+                title: 'Failed',
+                message: `{{ $message }}`,
+            }, {
+                type: 'danger',
+                placement: {
+                    from: "top",
+                    align: "right"
+                },
+                time: 5000,
+            });
+        </script>
+    @enderror
+    @if (@session('success'))
+        <script>
+            $.notify({
+                icon: 'fa fa-check-circle',
+                title: 'Success',
+                message: `{{ Session::get('success') }}`,
+            }, {
+                type: 'success',
+                placement: {
+                    from: "top",
+                    align: "right"
+                },
+                time: 5000,
+            });
+        </script>
+    @endif
 @endsection

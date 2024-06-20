@@ -10,7 +10,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminHomeController::class, 'index'])->name('admin.dashboard');
 
     // cakes
-    Route::resource('cakes', CakeController::class);
+    Route::resource('/cakes', CakeController::class);
 
     // variants
     Route::resource('/variants', CakeVariantController::class);
