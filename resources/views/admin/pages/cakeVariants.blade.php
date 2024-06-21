@@ -44,11 +44,11 @@
                                         {{-- ******** --}}
                                     </div>
                                     <div class="modal-footer border-0">
-                                        <button type="button" id="addRowButton" class="btn btn-primary">
-                                            Add
-                                        </button>
                                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                                             Close
+                                        </button>
+                                        <button type="button" id="addRowButton" class="btn btn-primary">
+                                            Add
                                         </button>
                                     </div>
                                 </div>
@@ -84,18 +84,22 @@
                                     </div>
 
                                     <div class="modal-footer border-0">
-                                        <button type="button" id="updateButton" class="btn btn-primary">
-                                            Update
-                                        </button>
                                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                                             Close
+                                        </button>
+                                        <button type="button" id="updateButton" class="btn btn-primary">
+                                            Update
                                         </button>
                                     </div>
                                 </div>
                             </div>
                         </div> {{-- edit modal ends --}}
 
-
+                        {{-- delete form --}}
+                        <form id="deleteVariant" method="post">
+                            @csrf
+                            @method('delete')
+                        </form>
 
                         <div class="table-responsive">
                             <table id="add-row" class="display table table-striped table-hover">
@@ -116,12 +120,11 @@
                                         <td>
                                             <div class="form-button-action">
 
-                                                <button id="editButton" data-id="{{ $variant->id }}" data-variantName="{{ ucfirst(trans(strtolower($variant->variant_name))) }}" type="button" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task" data-bs-toggle="modal" data-bs-target="#updateModal">
+                                                <button data-id="{{ $variant->id }}" data-variantName="{{ ucfirst(trans(strtolower($variant->variant_name))) }}" type="button" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task" data-bs-toggle="modal" data-bs-target="#updateModal">
                                                     <i class="fa fa-edit"></i>
                                                 </button>
 
-
-                                                <button type="button" data-bs-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
+                                                <button data-id="{{ $variant->id }}" type="button" data-bs-toggle="tooltip" title="" class="btn btn-link btn-danger deleteButton" data-original-title="Remove">
                                                     <i class="fa fa-times"></i>
                                                 </button>
 
@@ -161,14 +164,33 @@
             pageLength: 5,
         });
 
-
-
+        // submit create variant form
         $("#addRowButton").click(function() {
             $('#createVariant').submit();
         });
+
+        // submit update form
         $("#updateButton").click(function() {
             $('#updateVariant').submit();
         });
+
+        // delete
+        $(".deleteButton").click(function() {
+            swal({
+                title: "Are you sure?",
+                text: "You want to delete the variant?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    const id = $(this).data('id');
+                    const route = `/admin/variants/${id}`
+                    $("#deleteVariant").attr("action", route)
+                    $("#deleteVariant").submit()
+                }
+            });
+        })
 
         $("#updateModal").on("show.bs.modal", function(event) {
             const id = $(event.relatedTarget).data('id');
@@ -234,6 +256,23 @@
         message: `{{ Session::get('error') }}`,
     }, {
         type: 'danger',
+        placement: {
+            from: "top",
+            align: "right"
+        },
+        time: 5000,
+    });
+</script>
+@endif
+
+@if (@session('info'))
+<script>
+    $.notify({
+        icon: 'fa fa-info-circle',
+        title: 'Failed',
+        message: `{{ Session::get('info') }}`,
+    }, {
+        type: 'warning',
         placement: {
             from: "top",
             align: "right"
