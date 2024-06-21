@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CakeVariant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CakeVariantController extends Controller
 {
@@ -37,16 +38,16 @@ class CakeVariantController extends Controller
                 'variant_name' => 'required|string|max:255'
             ],
             [
-                'variant_name.required' => 'Variant field can\'t be null'
+                'variant_name.required' => 'Variant name field can\'t be null'
             ]
         );
 
         try {
             CakeVariant::create($validated_data);
-
             return back()->with('success', 'Variant add successful');
         } catch (\Throwable $th) {
-            dd($th->getMessage());
+            // dd($th->getMessage());
+            return back()->with('error', 'Something went wrong');
         }
     }
 
@@ -71,7 +72,19 @@ class CakeVariantController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            if ($request->has('variant_name')) {
+                $validated_data = $request->validate([
+                    'variant_name' => 'string|max:255'
+                ]);
+                CakeVariant::where('id', $id)->update($validated_data);
+                return back()->with('success', 'Variant update successful');
+            } else {
+                return back()->with('info', 'No new valuNothing Updated');
+            }
+        } catch (\Throwable $th) {
+            return back()->with('error', 'Something went wrong');
+        }
     }
 
     /**
