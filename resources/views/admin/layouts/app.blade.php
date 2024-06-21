@@ -252,9 +252,9 @@
 
 
         <!--   Core JS Files   -->
-        <script src="{{ asset('admin/assets/js/core/jquery-3.7.1.min.js') }}"></script>
-        <script src="{{ asset('admin/assets/js/core/popper.min.js') }}"></script>
-        <script src="{{ asset('admin/assets/js/core/bootstrap.min.js') }}"></script>
+        <script src="{{ URL::asset('admin/assets/js/core/jquery-3.7.1.min.js') }}"></script>
+        <script src="{{ URL::asset('admin/assets/js/core/popper.min.js') }}"></script>
+        <script src="{{ URL::asset('admin/assets/js/core/bootstrap.min.js') }}"></script>
 
         <!-- jQuery Scrollbar -->
         <script src="{{ asset('admin/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
