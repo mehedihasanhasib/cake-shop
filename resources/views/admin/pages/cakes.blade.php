@@ -64,7 +64,7 @@
                             <div class="d-flex align-items-center">
                                 <h4 class="card-title">Cakes</h4>
                                 <button class="btn btn-primary btn-round ms-auto" data-bs-toggle="modal"
-                                    data-bs-target="#addRowModal">
+                                    data-bs-target="#createCakeModal">
                                     <i class="fa fa-plus"></i>
                                     Add Cake
                                 </button>
@@ -72,7 +72,7 @@
                         </div>
                         <div class="card-body">
                             <!-- Modal -->
-                            <div class="modal fade modal-lg" id="addRowModal" tabindex="-1" role="dialog"
+                            <div class="modal fade modal-lg" id="createCakeModal" tabindex="-1" role="dialog"
                                 aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -94,8 +94,10 @@
                                                 <div class="form-group">
                                                     <input type="text" class="form-control form-control-lg"
                                                         id="name" placeholder="Cake Name" name="name">
+                                                    @error('name')
+                                                        <span style="color: red">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
-
                                                 <div class="form-group">
                                                     <select name="variant" id=""
                                                         class="form-select form-select-lg">
@@ -105,17 +107,27 @@
                                                             </option>
                                                         @endforeach
                                                     </select>
+                                                    @error('variant')
+                                                        <span style="color: red">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
 
                                                 <div id="image-preview"></div>
                                                 <div class="form-group">
-                                                    <input type="file" class="form-control form-control-lg"
-                                                        name="images[]" multiple id="image-input">
+                                                    <input id="image-input" type="file"
+                                                        class="form-control form-control-lg" name="images[]"
+                                                        accept="image/jpg, image/jpeg, image/png" multiple>
+                                                    @error('images*')
+                                                        <span style="color: red">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
 
                                                 <div class="form-group">
                                                     <input type="number" class="form-control form-control-lg"
                                                         name="price" placeholder="Price">
+                                                    @error('price')
+                                                        <span style="color: red">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
                                             </form>
                                             {{-- ******** --}}
@@ -301,7 +313,7 @@
     </script>
 
     {{-- error messages --}}
-    @error('variant_name')
+    {{-- @error('name')
         <script>
             $.notify({
                 icon: 'fa fa-times-circle',
@@ -317,6 +329,47 @@
             });
         </script>
     @enderror
+    @error('variant')
+        <script>
+            $.notify({
+                icon: 'fa fa-times-circle',
+                title: 'Failed',
+                message: `{{ $message }}`,
+            }, {
+                type: 'danger',
+                placement: {
+                    from: "top",
+                    align: "right"
+                },
+                time: 10000,
+            });
+        </script>
+    @enderror
+    @error('images')
+        <script>
+            $.notify({
+                icon: 'fa fa-times-circle',
+                title: 'Failed',
+                message: `{{ $message }}`,
+            }, {
+                type: 'danger',
+                placement: {
+                    from: "top",
+                    align: "right"
+                },
+                time: 10000,
+            });
+        </script>
+    @enderror --}}
+
+    @if ($errors->any())
+        <script>
+            $(document).ready(function() {
+                $('#createCakeModal').modal('show');
+            })
+        </script>
+    @endif
+
 
     @if (@session('success'))
         <script>

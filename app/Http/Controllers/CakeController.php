@@ -31,6 +31,18 @@ class CakeController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'variant' => 'required|string|max:255',
+            'images' => 'required',
+            'images.*' => 'mimetypes:image/jpg,image/jpeg,image/png|max:2040',
+            'price' => 'required|numeric|min:0'
+        ], [
+            'images.required' => 'Please choose an image.',
+            'images.*.mimes' => 'The image field must be a file of type: jpeg, png, jpg.',
+            'images.*.max' => 'The image should not exceed 2mb',
+        ]);
+
         dd($request->all());
     }
 

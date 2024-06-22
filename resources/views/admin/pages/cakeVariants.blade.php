@@ -34,7 +34,7 @@
                                         </div>
                                         <div class="modal-body">
 
-                                            {{-- create cake form --}}
+                                            {{-- create variant form --}}
                                             <form id="createVariant" action="{{ route('variants.store') }}" method="POST">
                                                 @csrf
                                                 <div class="row">
