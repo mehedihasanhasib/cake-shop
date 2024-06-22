@@ -12,4 +12,8 @@ class CakeVariant extends Model
     protected $fillable = [
         'variant_name'
     ];
+
+    public function cakes(){
+        return $this->hasMany(Cake::class, 'cake_variant_id');
+    }
 }

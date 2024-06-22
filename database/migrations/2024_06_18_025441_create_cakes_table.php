@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('cakes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('price');
             $table->unsignedBigInteger('cake_variant_id');
+            $table->string('price');
             $table->foreign('cake_variant_id')->references('id')->on('cake_variants');
             $table->timestamps();
         });

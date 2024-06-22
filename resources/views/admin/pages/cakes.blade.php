@@ -34,6 +34,15 @@
             background: #fff;
         }
 
+        .image-container2 img {
+            max-width: 150px;
+            max-height: 150px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            padding: 1px;
+            background: #fff;
+        }
+
         .close-button {
             position: absolute;
             top: 5px;
@@ -163,7 +172,7 @@
                                         <div class="modal-header border-0">
                                             <h5 class="modal-title" style="margin-left:6px">
                                                 <span class="fw-mediumbold"> Edit</span>
-                                                <span class="fw-mediumbold"> Variant </span>
+                                                <span class="fw-mediumbold"> Cake </span>
                                             </h5>
                                             <button type="button" class="close" data-bs-dismiss="modal"
                                                 aria-label="Close">
@@ -208,47 +217,55 @@
                                 <table id="add-row" class="display table table-striped table-hover">
                                     <thead>
                                         <tr>
-                                            <th style="width: 3vw">SL</th>
-                                            <th style="text-align: center">Name</th>
-                                            <th style="text-align: center">Variant</th>
+                                            <th style="text-align: center; width: 3vw">SL</th>
+                                            <th style="text-align: center; width:24vw;">Name</th>
+                                            <th style="text-align: center; width:4vw;">Variant</th>
+                                            <th style="text-align: center width:3vw;">Price</th>
                                             <th style="text-align: center">Picture</th>
-                                            <th style="text-align: center">Price</th>
                                             <th style="width: 10%; text-align: center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td style="text-align: center">
-                                                {{-- {{ ucfirst(trans(strtolower($variant->variant_name))) }} --}}
-                                            </td>
-                                            <td style="text-align: center">
-                                                {{-- {{ ucfirst(trans(strtolower($variant->variant_name))) }} --}}
-                                            </td>
-                                            <td style="text-align: center">
-                                                {{-- {{ ucfirst(trans(strtolower($variant->variant_name))) }} --}}
-                                            </td>
-                                            <td style="text-align: center">
-                                                {{-- {{ ucfirst(trans(strtolower($variant->variant_name))) }} --}}
-                                            </td>
-                                            <td>
-                                                <div class="form-button-action">
-                                                    <button data-id="" data-variantName="" type="button"
-                                                        class="btn btn-link btn-primary btn-lg"
-                                                        data-original-title="Edit Task" data-bs-toggle="modal"
-                                                        data-bs-target="#updateModal">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
+                                        @foreach ($cakes as $key => $cake)
+                                            <tr>
+                                                <td style="text-align: center;">{{ $key + 1 }}</td>
+                                                <td style="text-align: center">
+                                                    {{ $cake->name }}
+                                                </td>
+                                                <td style="text-align: center; width:4vw;">
+                                                    {{ $cake->cake_variant->variant_name }}
+                                                </td>
+                                                <td style="text-align: center; width:3vw;">
+                                                    {{ $cake->price }}
+                                                </td>
+                                                <td
+                                                    style="text-align: center; display: flex; justify-content: center; align-items: center;">
+                                                    @foreach ($cake->images as $image)
+                                                        <div class="image-container2">
+                                                            <img src="{{ asset($image->path) }}" alt="image"
+                                                                width="50">
+                                                        </div>
+                                                    @endforeach
+                                                </td>
+                                                <td>
+                                                    <div class="form-button-action">
+                                                        <button data-id="" data-variantName="" type="button"
+                                                            class="btn btn-link btn-primary btn-lg"
+                                                            data-original-title="Edit Task" data-bs-toggle="modal"
+                                                            data-bs-target="#updateModal">
+                                                            <i class="fa fa-edit"></i>
+                                                        </button>
 
-                                                    <button data-id="" type="button" data-bs-toggle="tooltip"
-                                                        title="" class="btn btn-link btn-danger deleteButton"
-                                                        data-original-title="Remove">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
+                                                        <button data-id="" type="button" data-bs-toggle="tooltip"
+                                                            title="" class="btn btn-link btn-danger deleteButton"
+                                                            data-original-title="Remove">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
 
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -263,6 +280,10 @@
 @section('script')
     <script>
         $(document).ready(function() {
+            $("#add-row").DataTable({
+                pageLength: 5,
+            });
+
             $("#createCakeSubmit").click(function() {
                 $("#createCakeForm").submit();
             })

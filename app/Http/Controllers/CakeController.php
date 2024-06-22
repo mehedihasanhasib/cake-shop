@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cake;
-use App\Models\Image;
 use App\Models\CakeVariant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,8 +15,10 @@ class CakeController extends Controller
     public function index()
     {
         $variants = CakeVariant::all();
+        $cakes = Cake::orderBy('id', 'desc')->get();
         return view('admin.pages.cakes', [
-            'variants' => $variants
+            'variants' => $variants,
+            'cakes' => $cakes
         ]);
     }
 
@@ -48,9 +49,6 @@ class CakeController extends Controller
             'cake_variant_id.required' => 'Variant field is required'
         ]);
 
-        dd($request->all());
-        exit;
-
         try {
             DB::beginTransaction();
             $cake = Cake::create($request->except(['images']));
@@ -58,8 +56,8 @@ class CakeController extends Controller
 
             foreach ($images as $key => $image) {
                 $file_name = time() . $image->getClientOriginalName();
-                $path =  public_path() . '/cake_images';
-                $image->move($path,  $file_name);
+                $path =  '/cake_images';
+                $image->move(public_path() . '/' . $path,  $file_name);
 
                 $cake->images()->create([
                     'path' => $path . '/' . $file_name

@@ -18,4 +18,9 @@ class Cake extends Model
     {
         return $this->hasMany(Image::class, 'cake_id');
     }
+
+    public function cake_variant()
+    {
+        return $this->belongsTo(CakeVariant::class, 'cake_variant_id');
+    }
 }
