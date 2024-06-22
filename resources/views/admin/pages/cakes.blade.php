@@ -93,21 +93,31 @@
                                                 @csrf
                                                 <div class="form-group">
                                                     <input type="text" class="form-control form-control-lg"
-                                                        id="name" placeholder="Cake Name" name="name">
+                                                        id="name" placeholder="Cake Name" name="name"
+                                                        value="{{ old('name') ?? null }}">
                                                     @error('name')
                                                         <span style="color: red">{{ $message }}</span>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
-                                                    <select name="variant" id=""
+                                                    <select name="cake_variant_id" id=""
                                                         class="form-select form-select-lg">
                                                         <option value="{{ null }}">Select Variant</option>
                                                         @foreach ($variants as $variant)
                                                             <option value="{{ $variant->id }}">{{ $variant->variant_name }}
                                                             </option>
                                                         @endforeach
+                                                        @if (old('cake_variant_id') != null)
+                                                            @foreach ($variants as $variant)
+                                                                @if ($variant->id == old('cake_variant_id'))
+                                                                    <option selected value="{{ $variant->id }}">
+                                                                        {{ $variant->variant_name }}
+                                                                    </option>
+                                                                @endif
+                                                            @endforeach
+                                                        @endif
                                                     </select>
-                                                    @error('variant')
+                                                    @error('cake_variant_id')
                                                         <span style="color: red">{{ $message }}</span>
                                                     @enderror
                                                 </div>
@@ -124,7 +134,8 @@
 
                                                 <div class="form-group">
                                                     <input type="number" class="form-control form-control-lg"
-                                                        name="price" placeholder="Price">
+                                                        name="price" placeholder="Price"
+                                                        value="{{ old('price') ?? null }}">
                                                     @error('price')
                                                         <span style="color: red">{{ $message }}</span>
                                                     @enderror

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cake;
+use App\Models\Image;
 use App\Models\CakeVariant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CakeController extends Controller
 {
@@ -31,9 +34,10 @@ class CakeController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'name' => 'required|string|max:255',
-            'variant' => 'required|string|max:255',
+            'cake_variant_id' => 'required|string|max:255',
             'images' => 'required',
             'images.*' => 'mimetypes:image/jpg,image/jpeg,image/png|max:2040',
             'price' => 'required|numeric|min:0'
@@ -41,9 +45,32 @@ class CakeController extends Controller
             'images.required' => 'Please choose an image.',
             'images.*.mimes' => 'The image field must be a file of type: jpeg, png, jpg.',
             'images.*.max' => 'The image should not exceed 2mb',
+            'cake_variant_id.required' => 'Variant field is required'
         ]);
 
         dd($request->all());
+        exit;
+
+        try {
+            DB::beginTransaction();
+            $cake = Cake::create($request->except(['images']));
+            $images = $request->file('images');
+
+            foreach ($images as $key => $image) {
+                $file_name = time() . $image->getClientOriginalName();
+                $path =  public_path() . '/cake_images';
+                $image->move($path,  $file_name);
+
+                $cake->images()->create([
+                    'path' => $path . '/' . $file_name
+                ]);
+            }
+            DB::commit();
+            return back()->with('success', 'Cake add successful');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->with('error', 'Something went wrong. Try again');
+        }
     }
 
     /**
