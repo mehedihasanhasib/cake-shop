@@ -172,6 +172,7 @@
                                     <div class="modal-body">
                                         <form id="updateCakeForm" method="POST" enctype="multipart/form-data">
                                             @csrf
+                                            @method('put')
                                             <div class="form-group">
                                                 <input type="text" class="form-control form-control-lg" id="name" placeholder="Cake Name" name="name" value="{{ old('name') ?? null }}">
                                                 @error('name')
@@ -194,8 +195,8 @@
 
                                             <div id="image-preview-edit"></div>
                                             <div class="form-group">
-                                                <input id="image-input" type="file" class="form-control form-control-lg" name="images[]" accept="image/jpg, image/jpeg, image/png" multiple>
-                                                @error('images*')
+                                                <input id="image-input-edit" type="file" class="form-control form-control-lg" name="updated-images[]" accept="image/jpg, image/jpeg, image/png" multiple>
+                                                @error('updated-images*')
                                                 <span style="color: red">{{ $message }}</span>
                                                 @enderror
                                             </div>
@@ -207,14 +208,13 @@
                                                 @enderror
                                             </div>
                                         </form>
-                                        {{-- ******** --}}
                                     </div>
                                     <div class="modal-footer border-0">
                                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                                             Close
                                         </button>
-                                        <button type="button" id="createCakeSubmit" class="btn btn-primary">
-                                            Add
+                                        <button type="button" id="updateCakeSubmit" class="btn btn-primary">
+                                            Update
                                         </button>
                                     </div>
                                 </div>
@@ -228,7 +228,7 @@
                         </form>
 
 
-                        {{-- rable --}}
+                        {{-- table --}}
                         <div class="table-responsive">
                             <table id="add-row" class="display table table-striped table-hover">
                                 <thead>
@@ -257,7 +257,7 @@
                                         <td style="text-align: center; display: flex; justify-content: center; align-items: center; height: 8vh;">
                                             @foreach ($cake->images as $image)
                                             <div class="image-container2">
-                                                <img src="{{ asset($image->path) }}" alt="image" width="50">
+                                                <img src="{{ asset($image->path) }}" alt="image" width="55">
                                             </div>
                                             @endforeach
                                         </td>
@@ -267,7 +267,8 @@
                                                     type="button" 
                                                     class="btn btn-link btn-primary btn-lg" 
                                                     data-bs-toggle="modal" 
-                                                    data-bs-target="#updateCakeModal" 
+                                                    data-bs-target="#updateCakeModal"
+                                                    data-cakeid = "{{ $cake->id  }}"
                                                     data-cakename="{{ $cake->name }}" 
                                                     data-variantname="{{ $cake->cake_variant->variant_name }}"
                                                     data-variantid="{{ $cake->cake_variant->id }}" 
@@ -306,11 +307,16 @@
         $("#createCakeSubmit").click(function() {
             $("#createCakeForm").submit();
         })
+
+        $("#updateCakeSubmit").click(function() {
+            $("#updateCakeForm").submit();
+        })
     })
 </script>
 
 <!-- {{-- image preview --}} -->
 <script>
+    // create modal
     document.getElementById('image-input').addEventListener('change', function(event) {
         const imagePreviewContainer = document.getElementById('image-preview');
         const files = event.target.files;
@@ -361,21 +367,74 @@
             input.files = dt.files;
         }
     });
+
+    // edit modal
+    document.getElementById('image-input-edit').addEventListener('change', function(event) {
+        const imagePreviewContainer = document.getElementById('image-preview-edit');
+        const files = event.target.files;
+
+        // imagePreviewContainer.innerHTML = ''; // Clear previous previews
+
+        const array = Array.from(files);
+
+        array.forEach((file, index) => {
+            const reader = new FileReader(file);
+
+            reader.onload = function(e) {
+
+                const imageContainer = document.createElement('div');
+                imageContainer.classList.add('image-container');
+
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.alt = file.name;
+
+                const closeButton = document.createElement('button');
+                closeButton.innerHTML = '&times;';
+                closeButton.classList.add('close-button');
+                closeButton.addEventListener('click', function() {
+                    imageContainer.remove();
+                    removeFile(index);
+                });
+
+                imageContainer.appendChild(img);
+                imageContainer.appendChild(closeButton);
+
+                imagePreviewContainer.appendChild(imageContainer);
+            };
+            reader.readAsDataURL(file);
+        });
+
+        function removeFile(index) {
+            const dt = new DataTransfer();
+            const input = document.getElementById('image-input-edit');
+            const {
+                files
+            } = input;
+            for (let i = 0; i < files.length; i++) {
+                if (i !== index) {
+                    dt.items.add(files[i]);
+                }
+            }
+            input.files = dt.files;
+        }
+    });
 </script>
 
 <!-- {{-- update --}} -->
-<script>
+<script> 
     $(document).ready(function() {
         $("#updateCakeModal").on("show.bs.modal", function(event) {
             const cake = {
-                cakeName: $(event.relatedTarget).data('cakename'),
-                variantName: $(event.relatedTarget).data("variantname"),
-                variantId: $(event.relatedTarget).data("variantid"),
-                price: $(event.relatedTarget).data("price"),
-                images: $(event.relatedTarget).data("images"),
+                cakeId : $(event.relatedTarget).data('cakeid'),
+                cakeName : $(event.relatedTarget).data('cakename'),
+                variantName : $(event.relatedTarget).data("variantname"),
+                variantId : $(event.relatedTarget).data("variantid"),
+                price : $(event.relatedTarget).data("price"),
+                images : $(event.relatedTarget).data("images"),
             }
 
-            const {cakeName, variantName, variantId, price, images} = cake;
+            const {cakeId, cakeName, variantName, variantId, price, images} = cake;
 
             // name field
             $("#name").val(cakeName);
@@ -392,7 +451,7 @@
             // image
             const imagePreviewContainer = document.getElementById('image-preview-edit');
             imagePreviewContainer.innerHTML = '';
-            
+
             images.forEach(function(image, index){
                 const imageContainer = document.createElement('div');
                 imageContainer.classList.add('image-container');
@@ -417,10 +476,11 @@
             $("#price").val(price);
             $("#price").attr('value', price);
 
+            // submit update from
+            const route = `/admin/cakes/${cakeId}`;
+            $("#updateCakeForm").attr('action', route);
         });
-
-
-    })
+    });
 </script>
 
 @if ($errors->any())

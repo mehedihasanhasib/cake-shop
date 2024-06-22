@@ -35,34 +35,33 @@ class CakeController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'name' => 'required|string|max:255',
             'cake_variant_id' => 'required|string|max:255',
             'images' => 'required',
             'images.*' => 'mimetypes:image/jpg,image/jpeg,image/png|max:2040',
-            'price' => 'required|numeric|min:0'
+            'price' => 'required|numeric'
         ], [
-            'images.required' => 'Please choose an image.',
-            'images.*.mimes' => 'The image field must be a file of type: jpeg, png, jpg.',
+            'images.required' => 'Please choose an image',
+            'images.*.mimetypes' => 'The image field must be type of: jpeg, png, jpg',
             'images.*.max' => 'The image should not exceed 2mb',
             'cake_variant_id.required' => 'Variant field is required'
         ]);
 
         try {
             DB::beginTransaction();
-            $cake = Cake::create($request->except(['images']));
-            $images = $request->file('images');
+                $cake = Cake::create($request->except(['images']));
+                $images = $request->file('images');
 
-            foreach ($images as $key => $image) {
-                $file_name = time() . $image->getClientOriginalName();
-                $path =  '/cake_images';
-                $image->move(public_path() . '/' . $path,  $file_name);
+                foreach ($images as $key => $image) {
+                    $file_name = time() . $image->getClientOriginalName();
+                    $path =  '/cake_images';
+                    $image->move(public_path() . '/' . $path,  $file_name);
 
-                $cake->images()->create([
-                    'path' => $path . '/' . $file_name
-                ]);
-            }
+                    $cake->images()->create([
+                        'path' => $path . '/' . $file_name
+                    ]);
+                }
             DB::commit();
             return back()->with('success', 'Cake add successful');
         } catch (\Throwable $th) {
@@ -92,7 +91,31 @@ class CakeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'cake_variant_id' => 'required|string|max:255',
+            'updated-images.*' => 'mimetypes:image/jpg,image/jpeg,image/png|max:2040',
+            'price' => 'required|numeric|min:0'
+        ], [
+            'updated-images.*.mimetypes' => 'The image field must be a file of type: jpeg, png, jpg.',
+            'updated-images.*.max' => 'The image should not exceed 2mb',
+            'cake_variant_id.required' => 'Variant field is required'
+        ]);
+
+        try {
+            $old_cake = Cake::select(['name', 'cake_variant_id', 'price'])->find($id)->toArray();
+            $new_cake = $request->only(['name', 'cake_variant_id', 'price']);
+
+            $updated_part = array_diff($new_cake, $old_cake);
+
+            if($updated_part){
+                $update = Cake::where('id', $id)->update($updated_part);
+            }
+            return back()->with('success', 'Cake update successful');
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
+            return back()->with('error', 'Something went wrong. Try again');
+        }
     }
 
     /**
