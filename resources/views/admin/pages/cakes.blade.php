@@ -80,7 +80,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <!-- Modal -->
+                            {{-- cake create Modal --}}
                             <div class="modal fade modal-lg" id="createCakeModal" tabindex="-1" role="dialog"
                                 aria-hidden="true">
                                 <div class="modal-dialog" role="document">
@@ -102,15 +102,14 @@
                                                 @csrf
                                                 <div class="form-group">
                                                     <input type="text" class="form-control form-control-lg"
-                                                        id="name" placeholder="Cake Name" name="name"
+                                                        placeholder="Cake Name" name="name"
                                                         value="{{ old('name') ?? null }}">
                                                     @error('name')
                                                         <span style="color: red">{{ $message }}</span>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
-                                                    <select name="cake_variant_id" id=""
-                                                        class="form-select form-select-lg">
+                                                    <select name="cake_variant_id" class="form-select form-select-lg">
                                                         <option value="{{ null }}">Select Variant</option>
                                                         @foreach ($variants as $variant)
                                                             <option value="{{ $variant->id }}">{{ $variant->variant_name }}
@@ -166,12 +165,13 @@
 
 
                             {{-- edit modal --}}
-                            <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal fade modal-lg" id="updateCakeModal" tabindex="-1" role="dialog"
+                                aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header border-0">
                                             <h5 class="modal-title" style="margin-left:6px">
-                                                <span class="fw-mediumbold"> Edit</span>
+                                                <span class="fw-mediumbold">Add</span>
                                                 <span class="fw-mediumbold"> Cake </span>
                                             </h5>
                                             <button type="button" class="close" data-bs-dismiss="modal"
@@ -179,28 +179,69 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-
-                                        {{-- edit form --}}
                                         <div class="modal-body">
-                                            <form id="updateVariant" method="POST">
+                                            {{-- create cake form --}}
+                                            <form id="updateCakeForm" method="POST" enctype="multipart/form-data">
                                                 @csrf
-                                                @method('put')
-                                                <div class="row">
-                                                    <div class="col-sm-12">
-                                                        <input id="variantName" class="form-control form-control-lg"
-                                                            type="text" placeholder="Variant Name"
-                                                            aria-label="Variant Name" name="variant_name">
-                                                    </div>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control form-control-lg"
+                                                        id="name" placeholder="Cake Name" name="name"
+                                                        value="{{ old('name') ?? null }}">
+                                                    @error('name')
+                                                        <span style="color: red">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <select name="cake_variant_id" id="variant"
+                                                        class="form-select form-select-lg">
+                                                        <option value="{{ null }}">Select Variant</option>
+                                                        @foreach ($variants as $variant)
+                                                            <option value="{{ $variant->id }}">
+                                                                {{ $variant->variant_name }}
+                                                            </option>
+                                                        @endforeach
+                                                        @if (old('cake_variant_id') != null)
+                                                            @foreach ($variants as $variant)
+                                                                @if ($variant->id == old('cake_variant_id'))
+                                                                    <option selected value="{{ $variant->id }}">
+                                                                        {{ $variant->variant_name }}
+                                                                    </option>
+                                                                @endif
+                                                            @endforeach
+                                                        @endif
+                                                    </select>
+                                                    @error('cake_variant_id')
+                                                        <span style="color: red">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+
+                                                <div id="image-preview"></div>
+                                                <div class="form-group">
+                                                    <input id="image-input" type="file"
+                                                        class="form-control form-control-lg" name="images[]"
+                                                        accept="image/jpg, image/jpeg, image/png" multiple>
+                                                    @error('images*')
+                                                        <span style="color: red">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <input id="price" type="number"
+                                                        class="form-control form-control-lg" name="price"
+                                                        placeholder="Price" value="{{ old('price') ?? null }}">
+                                                    @error('price')
+                                                        <span style="color: red">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
                                             </form>
+                                            {{-- ******** --}}
                                         </div>
-
                                         <div class="modal-footer border-0">
                                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                                                 Close
                                             </button>
-                                            <button type="button" id="updateButton" class="btn btn-primary">
-                                                Update
+                                            <button type="button" id="createCakeSubmit" class="btn btn-primary">
+                                                Add
                                             </button>
                                         </div>
                                     </div>
@@ -249,10 +290,13 @@
                                                 </td>
                                                 <td>
                                                     <div class="form-button-action">
-                                                        <button data-id="" data-variantName="" type="button"
-                                                            class="btn btn-link btn-primary btn-lg"
-                                                            data-original-title="Edit Task" data-bs-toggle="modal"
-                                                            data-bs-target="#updateModal">
+                                                        <button type="button" class="btn btn-link btn-primary btn-lg"
+                                                            data-bs-toggle="modal" data-bs-target="#updateCakeModal"
+                                                            data-cakename="{{ $cake->name }}"
+                                                            data-variantname="{{ $cake->cake_variant->variant_name }}"
+                                                            data-variantid="{{ $cake->cake_variant->id }}"
+                                                            data-images="{{ $cake->images }}"
+                                                            data-price="{{ $cake->price }}">
                                                             <i class="fa fa-edit"></i>
                                                         </button>
 
@@ -289,7 +333,6 @@
             })
         })
     </script>
-
 
     <script>
         document.getElementById('image-input').addEventListener('change', function(event) {
@@ -344,55 +387,50 @@
         });
     </script>
 
-    {{-- error messages --}}
-    {{-- @error('name')
-        <script>
-            $.notify({
-                icon: 'fa fa-times-circle',
-                title: 'Failed',
-                message: `{{ $message }}`,
-            }, {
-                type: 'danger',
-                placement: {
-                    from: "top",
-                    align: "right"
-                },
-                time: 10000,
+    {{-- update --}}
+    <script>
+        $(document).ready(function() {
+            $("#updateCakeModal").on("show.bs.modal", function(event) {
+                const cake = {
+                    cakeName: $(event.relatedTarget).data('cakename'),
+                    variantName: $(event.relatedTarget).data("variantname"),
+                    variantId: $(event.relatedTarget).data("variantid"),
+                    price: $(event.relatedTarget).data("price"),
+                }
+
+                const {
+                    cakeName,
+                    variantName,
+                    variantId,
+                    price
+                } = cake;
+
+                const variant = $('<option></option>').val(variantId).text(variantName).prop('selected',
+                    true);
+
+                $("#name").val(cakeName);
+                $("#name").attr('value', cakeName);
+
+                $.each(Array.from($("#variant").append(variant))[0], function(index, element) {
+                    if (element.value == variantId) {
+                        element.setAttribute('selected', true);
+                    }
+                })
+
+                $("#price").val(price);
+                $("#price").attr('value', price);
+
+                const input = document.getElementById('image-input');
+
+                // dt.items.add(files[i]);
+
+                // input.files = dt.files;
+
             });
-        </script>
-    @enderror
-    @error('variant')
-        <script>
-            $.notify({
-                icon: 'fa fa-times-circle',
-                title: 'Failed',
-                message: `{{ $message }}`,
-            }, {
-                type: 'danger',
-                placement: {
-                    from: "top",
-                    align: "right"
-                },
-                time: 10000,
-            });
-        </script>
-    @enderror
-    @error('images')
-        <script>
-            $.notify({
-                icon: 'fa fa-times-circle',
-                title: 'Failed',
-                message: `{{ $message }}`,
-            }, {
-                type: 'danger',
-                placement: {
-                    from: "top",
-                    align: "right"
-                },
-                time: 10000,
-            });
-        </script>
-    @enderror --}}
+
+
+        })
+    </script>
 
     @if ($errors->any())
         <script>
