@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Cake;
 use App\Models\CakeVariant;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class CakeController extends Controller
 {
@@ -104,16 +106,47 @@ class CakeController extends Controller
 
         try {
             $old_cake = Cake::select(['name', 'cake_variant_id', 'price'])->find($id)->toArray();
+
+            if (!$old_cake) {
+                return back()->with('error', 'Cake not found');
+            }
+
             $new_cake = $request->only(['name', 'cake_variant_id', 'price']);
 
             $updated_part = array_diff($new_cake, $old_cake);
 
             if($updated_part){
-                $update = Cake::where('id', $id)->update($updated_part);
+
+                Cake::where('id', $id)->update($updated_part);
+
+            } else if($request->hasFile('updated_images')){
+                $images = $request->updated_images;
+                foreach ($images as $key => $image) {
+                    $file_name = time() . $image->getClientOriginalName();
+                    $path =  '/cake_images';
+                    $image->move(public_path() . '/' . $path,  $file_name);
+
+                    Image::create([
+                        'path' => $path . '/' . $file_name,
+                        'cake_id' => $id
+                    ]);
+                }
+    
+            } else if (isset($request->imagesToRemove)) {
+                foreach($request->imagesToRemove as $id){
+                    $deleted_image = Image::find($id);
+                    $deleted_image_path = public_path($deleted_image->path);
+                    if(File::exists($deleted_image_path)){
+                        File::delete($deleted_image_path);                   
+                    }
+                    Image::destroy($id);
+                }
+            } else {
+                return back()->with('info', 'Nothing to update');
             }
+
             return back()->with('success', 'Cake update successful');
         } catch (\Throwable $th) {
-            dd($th->getMessage());
             return back()->with('error', 'Something went wrong. Try again');
         }
     }

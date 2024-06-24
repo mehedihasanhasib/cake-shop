@@ -60,11 +60,25 @@
         align-items: center;
         justify-content: center;
     }
+
+    #cake-image-show{
+        position: absolute;
+        height: 92.4vh;
+        width: 86.15vw;
+        background: hsla(0, 0%, 0%, 0.500);
+        z-index: 9999;
+        display: none;
+    }
 </style>
 @endsection
 
 @section('content')
 <div class="container">
+
+    <div id="cake-image-show">
+        <img src="{{ asset('cake_images/1719245977download (1).jpeg') }}" alt="">
+    </div>
+
     <div class="page-inner">
         <div class="row">
 
@@ -80,7 +94,6 @@
                         </div>
                     </div>
                     <div class="card-body">
-
                         <!-- {{-- cake create Modal --}} -->
                         <div class="modal fade modal-lg" id="createCakeModal" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -173,6 +186,7 @@
                                         <form id="updateCakeForm" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             @method('put')
+                                           
                                             <div class="form-group">
                                                 <input type="text" class="form-control form-control-lg" id="name" placeholder="Cake Name" name="name" value="{{ old('name') ?? null }}">
                                                 @error('name')
@@ -195,8 +209,8 @@
 
                                             <div id="image-preview-edit"></div>
                                             <div class="form-group">
-                                                <input id="image-input-edit" type="file" class="form-control form-control-lg" name="updated-images[]" accept="image/jpg, image/jpeg, image/png" multiple>
-                                                @error('updated-images*')
+                                                <input id="image-input-edit" type="file" class="form-control form-control-lg" name="updated_images[]" accept="image/jpg, image/jpeg, image/png" multiple>
+                                                @error('updated_images*')
                                                 <span style="color: red">{{ $message }}</span>
                                                 @enderror
                                             </div>
@@ -436,6 +450,9 @@
 
             const {cakeId, cakeName, variantName, variantId, price, images} = cake;
 
+
+            console.log(images);
+
             // name field
             $("#name").val(cakeName);
             $("#name").attr('value', cakeName);
@@ -464,6 +481,13 @@
                 closeButton.classList.add('close-button');
                 closeButton.addEventListener('click', function() {
                     imageContainer.remove();
+                    const input = document.createElement('input')
+                    const form = document.getElementById("updateCakeForm")
+                    input.value = image.id
+                    input.name = "imagesToRemove[]"
+                    input.type = "hidden"
+
+                    form.appendChild(input)
                 });
 
                 imageContainer.appendChild(img);
