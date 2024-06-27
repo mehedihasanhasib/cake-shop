@@ -120,7 +120,7 @@
                                     <tbody>
                                         @foreach ($variants as $key => $variant)
                                             <tr>
-                                                <td>{{ $key + 1 }}</td>
+                                                <td style="text-align: center">{{ $key + 1 }}</td>
                                                 <td style="text-align: center">
                                                     {{ ucfirst(trans(strtolower($variant->variant_name))) }}
                                                 </td>
