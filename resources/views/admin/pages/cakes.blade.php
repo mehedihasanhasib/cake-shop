@@ -72,27 +72,53 @@
 
 {{-- popup cake show --}}
 <style>
-    #cake-image-show{
+    #cake_image_show{
         position: absolute;
-        height: 92.4vh;
-        width: 86.15vw;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
         background: hsla(0, 0%, 0%, 0.500);
         z-index: 9999;
-        display: none;
+        display: block;
     }
+
+    #popup_close_button{
+        color: red;
+        font-size: 24px;
+        position: absolute;
+        top: 9px;
+        right: 7px;
+    }
+
+    @media screen and (min-width: 1920px) and (max-height: 1080px) {
+    #cake-image-show {
+        height: 100vh;
+        position: absolute;
+        top: 0;
+    }
+}
 </style>
 
 
 
 @endsection
 
-@section('content')
-<div class="container">
 
-    <div id="cake-image-show">
+
+@section('popup_div')
+    <div id="cake_image_show">
+        <div>
+            <i id="popup_close_button" class="fa fa-times-circle da-2x"></i>
+        </div>
         <img src="{{ asset('cake_images/1719245977download (1).jpeg') }}" alt="">
     </div>
+@endsection
 
+
+
+@section('content')
+<div class="container">
     <div class="page-inner">
         <div class="row">
 
@@ -274,7 +300,7 @@
                                         <td style="text-align: center; display: flex; justify-content: center; align-items: center;">
                                             @foreach ($cake->images as $image)
                                             <div class="image-container2">
-                                                <img src="{{ asset($image->path) }}" alt="image" width="55" height="55">
+                                                <img class="cake-image" data-path="{{ asset($image->path) }}" src="{{ asset($image->path) }}" alt="image" width="55" height="55" style="cursor: pointer">
                                             </div>
                                             @endforeach
                                         </td>
@@ -322,258 +348,269 @@
 @endsection
 
 @section('script')
-<script>
-    $(document).ready(function() {
-        $("#add-row").DataTable({
-            pageLength: 7,
-        });
+    <script>
+        $(document).ready(function() {
+            $("#add-row").DataTable({
+                pageLength: 7,
+            });
 
-        $("#createCakeSubmit").click(function() {
-            $("#createCakeForm").submit();
-        })
-
-        $("#updateCakeSubmit").click(function() {
-            $("#updateCakeForm").submit();
-        })
-    })
-</script>
-
-<!-- {{-- image preview --}} -->
-<script>
-    // create modal
-    document.getElementById('image-input').addEventListener('change', function(event) {
-        const imagePreviewContainer = document.getElementById('image-preview');
-        const files = event.target.files;
-
-        // imagePreviewContainer.innerHTML = ''; // Clear previous previews
-
-        const array = Array.from(files);
-
-        array.forEach((file, index) => {
-            const reader = new FileReader(file);
-
-            reader.onload = function(e) {
-
-                const imageContainer = document.createElement('div');
-                imageContainer.classList.add('image-container');
-
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                img.alt = file.name;
-
-                const closeButton = document.createElement('button');
-                closeButton.innerHTML = '&times;';
-                closeButton.classList.add('close-button');
-                closeButton.addEventListener('click', function() {
-                    imageContainer.remove();
-                    removeFile(index);
-                });
-
-                imageContainer.appendChild(img);
-                imageContainer.appendChild(closeButton);
-
-                imagePreviewContainer.appendChild(imageContainer);
-            };
-            reader.readAsDataURL(file);
-        });
-
-        function removeFile(index) {
-            const dt = new DataTransfer();
-            const input = document.getElementById('image-input');
-            const {
-                files
-            } = input;
-            for (let i = 0; i < files.length; i++) {
-                if (i !== index) {
-                    dt.items.add(files[i]);
-                }
-            }
-            input.files = dt.files;
-        }
-    });
-
-    // edit modal
-    document.getElementById('image-input-edit').addEventListener('change', function(event) {
-        const imagePreviewContainer = document.getElementById('image-preview-edit');
-        const files = event.target.files;
-
-        // imagePreviewContainer.innerHTML = ''; // Clear previous previews
-
-        const array = Array.from(files);
-
-        array.forEach((file, index) => {
-            const reader = new FileReader(file);
-
-            reader.onload = function(e) {
-
-                const imageContainer = document.createElement('div');
-                imageContainer.classList.add('image-container');
-
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                img.alt = file.name;
-
-                const closeButton = document.createElement('button');
-                closeButton.innerHTML = '&times;';
-                closeButton.classList.add('close-button');
-                closeButton.addEventListener('click', function() {
-                    imageContainer.remove();
-                    removeFile(index);
-                });
-
-                imageContainer.appendChild(img);
-                imageContainer.appendChild(closeButton);
-
-                imagePreviewContainer.appendChild(imageContainer);
-            };
-            reader.readAsDataURL(file);
-        });
-
-        function removeFile(index) {
-            const dt = new DataTransfer();
-            const input = document.getElementById('image-input-edit');
-            const {
-                files
-            } = input;
-            for (let i = 0; i < files.length; i++) {
-                if (i !== index) {
-                    dt.items.add(files[i]);
-                }
-            }
-            input.files = dt.files;
-        }
-    });
-</script>
-
-<!-- {{-- update --}} -->
-<script> 
-    $(document).ready(function() {
-        $("#updateCakeModal").on("show.bs.modal", function(event) {
-            const cake = {
-                cakeId : $(event.relatedTarget).data('cakeid'),
-                cakeName : $(event.relatedTarget).data('cakename'),
-                variantName : $(event.relatedTarget).data("variantname"),
-                variantId : $(event.relatedTarget).data("variantid"),
-                price : $(event.relatedTarget).data("price"),
-                images : $(event.relatedTarget).data("images"),
-            }
-
-            const {cakeId, cakeName, variantName, variantId, price, images} = cake;
-
-
-            console.log(images);
-
-            // name field
-            $("#name").val(cakeName);
-            $("#name").attr('value', cakeName);
-
-            // variant select
-            const select = document.getElementById("variant");
-            Array.from(select).forEach(function(element, index){
-                if(element.value == variantId){
-                    element.setAttribute('selected', true)
-                }
+            $("#createCakeSubmit").click(function() {
+                $("#createCakeForm").submit();
             })
 
-            // image
+            $("#updateCakeSubmit").click(function() {
+                $("#updateCakeForm").submit();
+            })
+        })
+    </script>
+
+    <!-- {{-- image preview --}} -->
+    <script>
+        // create modal
+        document.getElementById('image-input').addEventListener('change', function(event) {
+            const imagePreviewContainer = document.getElementById('image-preview');
+            const files = event.target.files;
+
+            // imagePreviewContainer.innerHTML = ''; // Clear previous previews
+
+            const array = Array.from(files);
+
+            array.forEach((file, index) => {
+                const reader = new FileReader(file);
+
+                reader.onload = function(e) {
+
+                    const imageContainer = document.createElement('div');
+                    imageContainer.classList.add('image-container');
+
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = file.name;
+
+                    const closeButton = document.createElement('button');
+                    closeButton.innerHTML = '&times;';
+                    closeButton.classList.add('close-button');
+                    closeButton.addEventListener('click', function() {
+                        imageContainer.remove();
+                        removeFile(index);
+                    });
+
+                    imageContainer.appendChild(img);
+                    imageContainer.appendChild(closeButton);
+
+                    imagePreviewContainer.appendChild(imageContainer);
+                };
+                reader.readAsDataURL(file);
+            });
+
+            function removeFile(index) {
+                const dt = new DataTransfer();
+                const input = document.getElementById('image-input');
+                const {
+                    files
+                } = input;
+                for (let i = 0; i < files.length; i++) {
+                    if (i !== index) {
+                        dt.items.add(files[i]);
+                    }
+                }
+                input.files = dt.files;
+            }
+        });
+
+        // edit modal
+        document.getElementById('image-input-edit').addEventListener('change', function(event) {
             const imagePreviewContainer = document.getElementById('image-preview-edit');
-            imagePreviewContainer.innerHTML = '';
+            const files = event.target.files;
 
-            images.forEach(function(image, index){
-                const imageContainer = document.createElement('div');
-                imageContainer.classList.add('image-container');
-                const img = document.createElement('img');
-                img.src = image.path;
-                img.alt = "image";
+            // imagePreviewContainer.innerHTML = ''; // Clear previous previews
 
-                const closeButton = document.createElement('button');
-                closeButton.innerHTML = '&times;';
-                closeButton.classList.add('close-button');
-                closeButton.addEventListener('click', function() {
-                    imageContainer.remove();
-                    const input = document.createElement('input')
-                    const form = document.getElementById("updateCakeForm")
-                    input.value = image.id
-                    input.name = "imagesToRemove[]"
-                    input.type = "hidden"
+            const array = Array.from(files);
 
-                    form.appendChild(input)
-                });
+            array.forEach((file, index) => {
+                const reader = new FileReader(file);
 
-                imageContainer.appendChild(img);
-                imageContainer.appendChild(closeButton);
+                reader.onload = function(e) {
 
-                imagePreviewContainer.appendChild(imageContainer);
-            })
+                    const imageContainer = document.createElement('div');
+                    imageContainer.classList.add('image-container');
 
-            // price field
-            $("#price").val(price);
-            $("#price").attr('value', price);
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = file.name;
 
-            // submit update from
-            const route = `/admin/cakes/${cakeId}`;
-            $("#updateCakeForm").attr('action', route);
+                    const closeButton = document.createElement('button');
+                    closeButton.innerHTML = '&times;';
+                    closeButton.classList.add('close-button');
+                    closeButton.addEventListener('click', function() {
+                        imageContainer.remove();
+                        removeFile(index);
+                    });
+
+                    imageContainer.appendChild(img);
+                    imageContainer.appendChild(closeButton);
+
+                    imagePreviewContainer.appendChild(imageContainer);
+                };
+                reader.readAsDataURL(file);
+            });
+
+            function removeFile(index) {
+                const dt = new DataTransfer();
+                const input = document.getElementById('image-input-edit');
+                const {
+                    files
+                } = input;
+                for (let i = 0; i < files.length; i++) {
+                    if (i !== index) {
+                        dt.items.add(files[i]);
+                    }
+                }
+                input.files = dt.files;
+            }
         });
-    });
-</script>
+    </script>
 
-@if ($errors->any())
-<script>
-    $(document).ready(function() {
-        $('#createCakeModal').modal('show');
-    })
-</script>
-@endif
+    <!-- {{-- update --}} -->
+    <script> 
+        $(document).ready(function() {
+            $("#updateCakeModal").on("show.bs.modal", function(event) {
+                const cake = {
+                    cakeId : $(event.relatedTarget).data('cakeid'),
+                    cakeName : $(event.relatedTarget).data('cakename'),
+                    variantName : $(event.relatedTarget).data("variantname"),
+                    variantId : $(event.relatedTarget).data("variantid"),
+                    price : $(event.relatedTarget).data("price"),
+                    images : $(event.relatedTarget).data("images"),
+                }
+
+                const {cakeId, cakeName, variantName, variantId, price, images} = cake;
 
 
-@if (@session('success'))
-<script>
-    $.notify({
-        icon: 'fa fa-check-circle',
-        title: 'Success',
-        message: `{{ Session::get('success') }}`,
-    }, {
-        type: 'success',
-        placement: {
-            from: "top",
-            align: "right"
-        },
-        time: 5000,
-    });
-</script>
-@endif
+                console.log(images);
 
-@if (@session('error'))
-<script>
-    $.notify({
-        icon: 'fa fa-times-circle',
-        title: 'Failed',
-        message: `{{ Session::get('error') }}`,
-    }, {
-        type: 'danger',
-        placement: {
-            from: "top",
-            align: "right"
-        },
-        time: 5000,
-    });
-</script>
-@endif
+                // name field
+                $("#name").val(cakeName);
+                $("#name").attr('value', cakeName);
 
-@if (@session('info'))
-<script>
-    $.notify({
-        icon: 'fa fa-info-circle',
-        title: 'Failed',
-        message: `{{ Session::get('info') }}`,
-    }, {
-        type: 'warning',
-        placement: {
-            from: "top",
-            align: "right"
-        },
-        time: 5000,
-    });
-</script>
-@endif
+                // variant select
+                const select = document.getElementById("variant");
+                Array.from(select).forEach(function(element, index){
+                    if(element.value == variantId){
+                        element.setAttribute('selected', true)
+                    }
+                })
+
+                // image
+                const imagePreviewContainer = document.getElementById('image-preview-edit');
+                imagePreviewContainer.innerHTML = '';
+
+                images.forEach(function(image, index){
+                    const imageContainer = document.createElement('div');
+                    imageContainer.classList.add('image-container');
+                    const img = document.createElement('img');
+                    img.src = image.path;
+                    img.alt = "image";
+
+                    const closeButton = document.createElement('button');
+                    closeButton.innerHTML = '&times;';
+                    closeButton.classList.add('close-button');
+                    closeButton.addEventListener('click', function() {
+                        imageContainer.remove();
+                        const input = document.createElement('input')
+                        const form = document.getElementById("updateCakeForm")
+                        input.value = image.id
+                        input.name = "imagesToRemove[]"
+                        input.type = "hidden"
+
+                        form.appendChild(input)
+                    });
+
+                    imageContainer.appendChild(img);
+                    imageContainer.appendChild(closeButton);
+
+                    imagePreviewContainer.appendChild(imageContainer);
+                })
+
+                // price field
+                $("#price").val(price);
+                $("#price").attr('value', price);
+
+                // submit update from
+                const route = `/admin/cakes/${cakeId}`;
+                $("#updateCakeForm").attr('action', route);
+            });
+        });
+    </script>
+
+    @if ($errors->any())
+    <script>
+        $(document).ready(function() {
+            $('#createCakeModal').modal('show');
+        })
+    </script>
+    @endif
+
+
+    @if (@session('success'))
+    <script>
+        $.notify({
+            icon: 'fa fa-check-circle',
+            title: 'Success',
+            message: `{{ Session::get('success') }}`,
+        }, {
+            type: 'success',
+            placement: {
+                from: "top",
+                align: "right"
+            },
+            time: 5000,
+        });
+    </script>
+    @endif
+
+    @if (@session('error'))
+    <script>
+        $.notify({
+            icon: 'fa fa-times-circle',
+            title: 'Failed',
+            message: `{{ Session::get('error') }}`,
+        }, {
+            type: 'danger',
+            placement: {
+                from: "top",
+                align: "right"
+            },
+            time: 5000,
+        });
+    </script>
+    @endif
+
+    @if (@session('info'))
+    <script>
+        $.notify({
+            icon: 'fa fa-info-circle',
+            title: 'Failed',
+            message: `{{ Session::get('info') }}`,
+        }, {
+            type: 'warning',
+            placement: {
+                from: "top",
+                align: "right"
+            },
+            time: 5000,
+        });
+    </script>
+    @endif
+
+
+    {{-- image popup script --}}
+    <script>
+        $(document).ready(function(){
+            $("#popup_close_button").click(function(){
+                console.log("null");
+                $("#cake_image_show").css('display', 'none');
+            })
+        })
+    </script>
 @endsection

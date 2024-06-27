@@ -41,6 +41,11 @@
 </head>
 
 <body>
+
+    {{-- all cake page imae popup --}}
+    @yield('popup_div')
+    {{-- --------- --}}
+
     <div class="wrapper">
         <!-- Sidebar -->
         <div class="sidebar sidebar-style-2" data-background-color="dark">
@@ -317,6 +322,9 @@
                 fillColor: "rgba(255, 165, 52, .14)",
             });
         </script>
+
+
+        
 
         @yield('script')
 </body>
