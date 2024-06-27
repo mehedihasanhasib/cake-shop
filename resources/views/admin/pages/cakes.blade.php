@@ -1,6 +1,8 @@
 @extends('admin.layouts.app', ['title' => 'Cakes'])
 
 @section('style')
+
+{{-- create cake style --}}
 <style>
     input[type="number"]::-webkit-inner-spin-button,
     input[type="number"]::-webkit-outer-spin-button {
@@ -35,6 +37,11 @@
         background: #fff;
     }
 
+</style>
+
+
+{{-- edit cake style --}}
+<style>
     .image-container2 img {
         max-width: 150px;
         max-height: 150px;
@@ -60,7 +67,11 @@
         align-items: center;
         justify-content: center;
     }
+</style>
 
+
+{{-- popup cake show --}}
+<style>
     #cake-image-show{
         position: absolute;
         height: 92.4vh;
@@ -70,6 +81,9 @@
         display: none;
     }
 </style>
+
+
+
 @endsection
 
 @section('content')
@@ -121,13 +135,8 @@
                                                     <option value="{{ null }}">Select Variant</option>
                                                     @foreach ($variants as $variant)
                                                     @php
-                                                    $hasOld = old('cake_variant_id') != null ? true : false;
-
-                                                    $selected = $hasOld
-                                                    ? ($variant->id == old('cake_variant_id')
-                                                    ? 'selected'
-                                                    : null)
-                                                    : null;
+                                                        $hasOld = old('cake_variant_id') != null ? true : false;
+                                                        $selected = $hasOld? ($variant->id == old('cake_variant_id')? 'selected': null): null;
                                                     @endphp
                                                     <option {{ $selected }} value="{{ $variant->id }}">
                                                         {{ $variant->variant_name }}
@@ -248,33 +257,34 @@
                                 <thead>
                                     <tr>
                                         <th style="text-align: center; width: 3vw">SL</th>
-                                        <th style="text-align: center; width: 24vw;">Name</th>
+                                        <th style="text-align: center; width: 12vw;">Name</th>
+                                        <th style="text-align: center">Picture</th>
                                         <th style="text-align: center; width: 4vw;">Variant</th>
                                         <th style="text-align: center; width: 3vw;">Price</th>
-                                        <th style="text-align: center">Picture</th>
                                         <th style="width: 10%; text-align: center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($cakes as $key => $cake)
-                                    <tr>
+                                    <tr style="height: 5vh">
                                         <td style="text-align: center;">{{ $key + 1 }}</td>
-                                        <td style="text-align: center">
+                                        <td style="text-align: center; width:4vw;">
                                             {{ $cake->name }}
                                         </td>
-                                        <td style="text-align: center; width:4vw;">
-                                            {{ $cake->cake_variant->variant_name }}
-                                        </td>
-                                        <td style="text-align: center; width:3vw;">
-                                            {{ $cake->price }}
-                                        </td>
-                                        <td style="text-align: center; display: flex; justify-content: center; align-items: center; height: 8vh;">
+                                        <td style="text-align: center; display: flex; justify-content: center; align-items: center;">
                                             @foreach ($cake->images as $image)
                                             <div class="image-container2">
-                                                <img src="{{ asset($image->path) }}" alt="image" width="55">
+                                                <img src="{{ asset($image->path) }}" alt="image" width="55" height="55">
                                             </div>
                                             @endforeach
                                         </td>
+                                        <td style="text-align: center;">
+                                            {{ $cake->cake_variant->variant_name }}
+                                        </td>
+                                        <td style="text-align: center;">
+                                            {{ $cake->price }}
+                                        </td>
+                                        
                                         <td>
                                             <div class="form-button-action">
                                                 <button 
@@ -315,7 +325,7 @@
 <script>
     $(document).ready(function() {
         $("#add-row").DataTable({
-            pageLength: 5,
+            pageLength: 7,
         });
 
         $("#createCakeSubmit").click(function() {
