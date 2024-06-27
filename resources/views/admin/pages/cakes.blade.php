@@ -294,10 +294,10 @@
                                     @foreach ($cakes as $key => $cake)
                                     <tr style="height: 5vh">
                                         <td style="text-align: center;">{{ $key + 1 }}</td>
-                                        <td style="text-align: center; width:4vw;">
+                                        <td style="text-align: center;">
                                             {{ $cake->name }}
                                         </td>
-                                        <td style="text-align: center; display: flex; justify-content: center; align-items: center;">
+                                        <td style="text-align: center; display: flex; justify-content: center; align-items: center;min-height: 12vh;">
                                             @foreach ($cake->images as $image)
                                             <div class="image-container2">
                                                 <img class="cake-image" data-path="{{ asset($image->path) }}" src="{{ asset($image->path) }}" alt="image" width="55" height="55" style="cursor: pointer">

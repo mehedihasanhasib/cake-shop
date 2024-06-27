@@ -64,21 +64,15 @@
                             <i class="gg-menu-left"></i>
                         </button>
                     </div>
+
+                    <button class="topbar-toggler more">
+                        <i class="gg-more-vertical-alt"></i>
+                    </button>
                 </div>
                 <!-- End Logo Header -->
             </div>
             <div class="sidebar-wrapper scrollbar scrollbar-inner">
                 <div class="sidebar-content">
-                    <div class="user-box mt-3">
-                        <div class="avatar-lg d-flex">
-                            <img src="assets/img/profile.jpg" alt="image profile" class="avatar-img rounded" />
-                        </div>
-
-                        <div class="u-text">
-                            <h4>Hizrian</h4>
-                            <a href="" class="btn btn-xs btn-secondary btn-sm">Logout</a>
-                        </div>
-                    </div>
                     <ul class="nav nav-secondary">
                         <li class="nav-item {{ Route::is('admin.dashboard') ? 'active' : null }}">
                             <a href="{{ route('admin.dashboard') }}">
