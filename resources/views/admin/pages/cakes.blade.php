@@ -80,7 +80,7 @@
         width: 100vw;
         background: hsla(0, 0%, 0%, 0.500);
         z-index: 9999;
-        display: block;
+        display: none;
     }
 
     #popup_close_button{
@@ -318,12 +318,7 @@
                                                     class="btn btn-link btn-primary btn-lg" 
                                                     data-bs-toggle="modal" 
                                                     data-bs-target="#updateCakeModal"
-                                                    data-cakeid = "{{ $cake->id  }}"
-                                                    data-cakename="{{ $cake->name }}" 
-                                                    data-variantname="{{ $cake->cake_variant->variant_name }}"
-                                                    data-variantid="{{ $cake->cake_variant->id }}" 
-                                                    data-images="{{ $cake->images }}"
-                                                    data-price="{{ $cake->price }}"
+                                                    data-cake="{{ $cake }}"
                                                  >
                                                     <i class="fa fa-edit"></i>
                                                 </button>
@@ -475,19 +470,10 @@
     <script> 
         $(document).ready(function() {
             $("#updateCakeModal").on("show.bs.modal", function(event) {
-                const cake = {
-                    cakeId : $(event.relatedTarget).data('cakeid'),
-                    cakeName : $(event.relatedTarget).data('cakename'),
-                    variantName : $(event.relatedTarget).data("variantname"),
-                    variantId : $(event.relatedTarget).data("variantid"),
-                    price : $(event.relatedTarget).data("price"),
-                    images : $(event.relatedTarget).data("images"),
-                }
 
-                const {cakeId, cakeName, variantName, variantId, price, images} = cake;
+                const cake = $(event.relatedTarget).data('cake');
 
-
-                console.log(images);
+                const {id:cakeId, name:cakeName, variantName, cake_variant_id:variantId, price:price, images:images} = cake;
 
                 // name field
                 $("#name").val(cakeName);
@@ -608,7 +594,6 @@
     <script>
         $(document).ready(function(){
             $("#popup_close_button").click(function(){
-                console.log("null");
                 $("#cake_image_show").css('display', 'none');
             })
         })
