@@ -31,6 +31,12 @@
 
     @yield('style')
 
+    <style>
+        body{
+            scroll-behavior: smooth;
+        }
+    </style>
+
     <!-- CSS Files -->
     <link rel="stylesheet" href="{{ asset('admin/assets/css/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('admin/assets/css/plugins.min.css') }}" />
