@@ -93,6 +93,7 @@ class CakeController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        // dd($request->hasFile('updated_images'));
         $request->validate([
             'name' => 'required|string|max:255',
             'cake_variant_id' => 'required|string|max:255',
@@ -104,7 +105,7 @@ class CakeController extends Controller
             'cake_variant_id.required' => 'Variant field is required'
         ]);
 
-        try {
+        // try {
             $old_cake = Cake::select(['name', 'cake_variant_id', 'price'])->find($id)->toArray();
 
             if (!$old_cake) {
@@ -133,7 +134,8 @@ class CakeController extends Controller
                 }
     
             } else if (isset($request->imagesToRemove)) {
-                foreach($request->imagesToRemove as $id){
+                $imagesToRemove = json_decode($request->imagesToRemove);
+                foreach($imagesToRemove as $id){
                     $deleted_image = Image::find($id);
                     $deleted_image_path = public_path($deleted_image->path);
                     if(File::exists($deleted_image_path)){
@@ -146,9 +148,10 @@ class CakeController extends Controller
             }
 
             return back()->with('success', 'Cake update successful');
-        } catch (\Throwable $th) {
-            return back()->with('error', 'Something went wrong. Try again');
-        }
+        // } catch (\Throwable $th) {
+        //     dd($th->getMessage());
+        //     return back()->with('error', 'Something went wrong. Try again');
+        // }
     }
 
     /**
@@ -156,6 +159,6 @@ class CakeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        dd($id);
     }
 }

@@ -71,42 +71,27 @@
     {{-- popup cake show --}}
     <style>
         #cake_image_show {
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
             height: 100vh;
-            width: 98.9vw;
+            width: 99.1vw;
             background: hsla(0, 0%, 0%, 0.500);
             z-index: 9999;
-            display: block;
+            display: none;
         }
 
         #popup_close_button {
+            position: absolute;
+            right: 12px;
+            top: 9px;
             color: red;
             font-size: 24px;
-            position: absolute;
-            top: 9px;
-            right: 7px;
             cursor: pointer;
         }
 
-        @media screen and (width <= 1536px) and (max-height: 864px) {
-            #cake-image-show {
-                height: 100vh;
-                width: 98.9vw;
-                position: absolute;
-                top: 0;
-            }
-        }
-
-        @media screen and (width <= 1920px) and (max-height: 1080px) {
-            #cake-image-show {
-                height: 100vh;
-                width: 99vw;
-                position: absolute;
-                top: 0;
-
-            }
+        #popup_close_button:hover {
+            color: darkred;
         }
     </style>
 @endsection
@@ -118,7 +103,7 @@
         <div>
             <i id="popup_close_button" class="fa fa-times-circle da-2x"></i>
         </div>
-        <img src="{{ asset('cake_images/1719245977download (1).jpeg') }}" alt="">
+        <img src="" alt="">
     </div>
 @endsection
 
@@ -301,7 +286,7 @@
                             </div> {{-- edit modal ends --}}
 
                             {{-- delete form --}}
-                            <form id="deleteVariant" method="post">
+                            <form id="deleteCakeForm" method="post">
                                 @csrf
                                 @method('delete')
                             </form>
@@ -346,18 +331,13 @@
 
                                                 <td>
                                                     <div class="form-button-action">
-                                                        <button type="button" class="btn btn-link btn-primary btn-lg"
-                                                            data-bs-toggle="modal" data-bs-target="#updateCakeModal"
-                                                            data-cake="{{ $cake }}">
+                                                        <button type="button" class="btn btn-link btn-primary" data-bs-toggle="modal" data-bs-target="#updateCakeModal" data-cake="{{ $cake }}">
                                                             <i class="fa fa-edit"></i>
                                                         </button>
 
-                                                        <button data-id="" type="button" data-bs-toggle="tooltip"
-                                                            title="" class="btn btn-link btn-danger deleteButton"
-                                                            data-original-title="Remove">
-                                                            <i class="fa fa-times"></i>
+                                                        <button id="delete-button" data-id="{{ $cake->id }}" type="button" class="btn btn-link btn-danger">
+                                                            <i class="fa fa-trash"></i>
                                                         </button>
-
                                                     </div>
                                                 </td>
                                             </tr>
@@ -501,6 +481,20 @@
     <script>
         $(document).ready(function() {
             $("#updateCakeModal").on("show.bs.modal", function(event) {
+                const form = document.getElementById("updateCakeForm")
+                const input = document.createElement('input')
+                const inputs = form.elements
+                input.name = "imagesToRemove"
+                input.type = "hidden"
+                let ids = [];
+
+                for (let i = 0; i < inputs.length; i++) {
+                    
+                    if (inputs[i].name == "imagesToRemove") {
+                       ids = []
+                    }
+                    
+                }
 
                 const cake = $(event.relatedTarget).data('cake');
 
@@ -539,16 +533,14 @@
                     const closeButton = document.createElement('button');
                     closeButton.innerHTML = '&times;';
                     closeButton.classList.add('close-button');
+                    
                     closeButton.addEventListener('click', function() {
                         imageContainer.remove();
-                        const input = document.createElement('input')
-                        const form = document.getElementById("updateCakeForm")
-                        input.value = image.id
-                        input.name = "imagesToRemove[]"
-                        input.type = "hidden"
-
-                        form.appendChild(input)
+                        ids.push(image.id)
+                        input.value = JSON.stringify(ids);
                     });
+                    
+                    form.appendChild(input)
 
                     imageContainer.appendChild(img);
                     imageContainer.appendChild(closeButton);
@@ -564,6 +556,24 @@
                 const route = `/admin/cakes/${cakeId}`;
                 $("#updateCakeForm").attr('action', route);
             });
+        });
+
+
+        // delete
+        $('#delete-button').click(function(event){
+            console.log(event);
+            swal({
+                    title: "Are you sure?",
+                    text: "You want to delete the cake?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    const cakeId = $(this).data('id');
+                    const route = `/admin/cakes/${cakeId}`
+                    $('#deleteCakeForm').attr('action', route);
+                    $('#deleteCakeForm').submit();
+                });
         });
     </script>
 
@@ -631,6 +641,12 @@
     {{-- image popup script --}}
     <script>
         $(document).ready(function() {
+
+            $('.cake-image').click(function(event) {
+                console.log(event);
+                $("#cake_image_show").css('display', 'block');
+            })
+
             $("#popup_close_button").click(function() {
                 $("#cake_image_show").css('display', 'none');
             })
