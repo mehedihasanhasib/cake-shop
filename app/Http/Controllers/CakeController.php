@@ -105,7 +105,8 @@ class CakeController extends Controller
             'cake_variant_id.required' => 'Variant field is required'
         ]);
 
-        // try {
+        DB::beginTransaction();
+        try {
             $old_cake = Cake::select(['name', 'cake_variant_id', 'price'])->find($id)->toArray();
 
             if (!$old_cake) {
@@ -147,11 +148,13 @@ class CakeController extends Controller
                 return back()->with('info', 'Nothing to update');
             }
 
+            DB::commit();
             return back()->with('success', 'Cake update successful');
-        // } catch (\Throwable $th) {
-        //     dd($th->getMessage());
-        //     return back()->with('error', 'Something went wrong. Try again');
-        // }
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            dd($th->getMessage());
+            return back()->with('error', 'Something went wrong. Try again');
+        }
     }
 
     /**
@@ -159,6 +162,27 @@ class CakeController extends Controller
      */
     public function destroy(string $id)
     {
-        dd($id);
+        DB::beginTransaction();
+        try {
+            $cake = Cake::find($id);
+            $images = $cake->images;
+
+            foreach ($images as $key => $image) {
+                $deleted_image_path = public_path($image->path);
+                if(File::exists($deleted_image_path)){
+                    File::delete($deleted_image_path);                   
+                }
+            }
+
+            $cake->delete();
+
+            DB::commit();
+            return back()->with('success', 'Cake delete successful');
+        
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            // dd($th->getMessage());
+            return back()->with('error', 'Something went wrong. Try again');
+        }
     }
 }

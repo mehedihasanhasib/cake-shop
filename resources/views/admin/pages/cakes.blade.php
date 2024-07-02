@@ -332,11 +332,11 @@
                                                 <td>
                                                     <div class="form-button-action">
                                                         <button type="button" class="btn btn-link btn-primary" data-bs-toggle="modal" data-bs-target="#updateCakeModal" data-cake="{{ $cake }}">
-                                                            <i class="fa fa-edit"></i>
+                                                            <i class="fa fa-edit fa-lg"></i>
                                                         </button>
 
-                                                        <button id="delete-button" data-id="{{ $cake->id }}" type="button" class="btn btn-link btn-danger">
-                                                            <i class="fa fa-trash"></i>
+                                                        <button data-id="{{ $cake->id }}" type="button" class="btn btn-link btn-danger delete-button">
+                                                            <i class="fa fa-trash fa-lg"></i>
                                                         </button>
                                                     </div>
                                                 </td>
@@ -560,7 +560,7 @@
 
 
         // delete
-        $('#delete-button').click(function(event){
+        $('.delete-button').click(function(event){
             console.log(event);
             swal({
                     title: "Are you sure?",
@@ -569,10 +569,12 @@
                     buttons: true,
                     dangerMode: true,
                 }).then((willDelete) => {
-                    const cakeId = $(this).data('id');
-                    const route = `/admin/cakes/${cakeId}`
-                    $('#deleteCakeForm').attr('action', route);
-                    $('#deleteCakeForm').submit();
+                    if (willDelete) {
+                        const cakeId = $(this).data('id');
+                        const route = `/admin/cakes/${cakeId}`
+                        $('#deleteCakeForm').attr('action', route);
+                        $('#deleteCakeForm').submit();
+                    }
                 });
         });
     </script>

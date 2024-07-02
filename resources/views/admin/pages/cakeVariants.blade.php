@@ -129,17 +129,17 @@
 
                                                         <button data-id="{{ $variant->id }}"
                                                             data-variantName="{{ ucfirst(trans(strtolower($variant->variant_name))) }}"
-                                                            type="button" class="btn btn-link btn-primary btn-lg"
+                                                            type="button" class="btn btn-link btn-primary btn"
                                                             data-original-title="Edit Task" data-bs-toggle="modal"
                                                             data-bs-target="#updateModal">
-                                                            <i class="fa fa-edit"></i>
+                                                            <i class="fa fa-edit fa-lg"></i>
                                                         </button>
 
                                                         <button data-id="{{ $variant->id }}" type="button"
                                                             data-bs-toggle="tooltip" title=""
                                                             class="btn btn-link btn-danger deleteButton"
                                                             data-original-title="Remove">
-                                                            <i class="fa fa-times"></i>
+                                                            <i class="fa fa-trash fa-lg"></i>
                                                         </button>
 
                                                     </div>
