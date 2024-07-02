@@ -125,21 +125,19 @@
                                                     {{ ucfirst(trans(strtolower($variant->variant_name))) }}
                                                 </td>
                                                 <td>
-                                                    <div class="form-button-action">
+                                                    <div class="d-flex justify-content-center">
 
                                                         <button data-id="{{ $variant->id }}"
                                                             data-variantName="{{ ucfirst(trans(strtolower($variant->variant_name))) }}"
-                                                            type="button" class="btn btn-link btn-primary btn"
-                                                            data-original-title="Edit Task" data-bs-toggle="modal"
+                                                            type="button" style="padding: 8px !important;" class="btn btn-sm btn-primary m-1" data-bs-toggle="modal"
                                                             data-bs-target="#updateModal">
-                                                            <i class="fa fa-edit fa-lg"></i>
+                                                            <i class="fa fa-edit"></i>
                                                         </button>
 
                                                         <button data-id="{{ $variant->id }}" type="button"
-                                                            data-bs-toggle="tooltip" title=""
-                                                            class="btn btn-link btn-danger deleteButton"
-                                                            data-original-title="Remove">
-                                                            <i class="fa fa-trash fa-lg"></i>
+                                                            data-bs-toggle="tooltip" style="padding: 8px !important;" class="btn btn-sm btn-danger m-1 deleteButton"
+                                                        >
+                                                            <i class="fa fa-trash"></i>
                                                         </button>
 
                                                     </div>

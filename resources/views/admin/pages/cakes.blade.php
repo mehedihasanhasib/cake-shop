@@ -330,13 +330,15 @@
                                                 </td>
 
                                                 <td>
-                                                    <div class="form-button-action">
-                                                        <button type="button" class="btn btn-link btn-primary" data-bs-toggle="modal" data-bs-target="#updateCakeModal" data-cake="{{ $cake }}">
+                                                    <div class="d-flex justify-content-center">
+                                                        <button type="button" style="padding: 8px !important;" class="btn btn-sm btn-primary m-1" data-bs-toggle="modal" data-bs-target="#updateCakeModal" data-cake="{{ $cake }}">
                                                             <i class="fa fa-edit fa-lg"></i>
+                                                            {{-- Edit --}}
                                                         </button>
 
-                                                        <button data-id="{{ $cake->id }}" type="button" class="btn btn-link btn-danger delete-button">
+                                                        <button data-id="{{ $cake->id }}" type="button" style="padding: 8px !important;" class="btn btn-sm btn-danger m-1 delete-button">
                                                             <i class="fa fa-trash fa-lg"></i>
+                                                            {{-- Delete --}}
                                                         </button>
                                                     </div>
                                                 </td>
