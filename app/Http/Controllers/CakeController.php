@@ -37,6 +37,7 @@ class CakeController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'name' => 'required|string|max:255',
             'cake_variant_id' => 'required|string|max:255',

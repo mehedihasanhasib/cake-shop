@@ -373,19 +373,21 @@
     <!-- {{-- image preview --}} -->
     <script>
         // create modal
-        document.getElementById('image-input').addEventListener('change', function(event) {
+        let imageInput = document.getElementById('image-input')
+        let images = new DataTransfer()
+
+        imageInput.addEventListener('change', function(event) {
             const imagePreviewContainer = document.getElementById('image-preview');
             const files = event.target.files;
-
-            // imagePreviewContainer.innerHTML = ''; // Clear previous previews
-
+            const currentSelectedImages = new DataTransfer();
+            
             const array = Array.from(files);
-
             array.forEach((file, index) => {
+
+                currentSelectedImages.items.add(file);
+
                 const reader = new FileReader(file);
-
                 reader.onload = function(e) {
-
                     const imageContainer = document.createElement('div');
                     imageContainer.classList.add('image-container');
 
@@ -409,27 +411,36 @@
                 reader.readAsDataURL(file);
             });
 
+            // console.log(currentSelectedImages.files);
+
+            for (let i = 0; i < currentSelectedImages.files.length; i++) {
+                images.items.add(currentSelectedImages.files[i])
+            }
+
             function removeFile(index) {
-                const dt = new DataTransfer();
-                const input = document.getElementById('image-input');
-                const {
-                    files
-                } = input;
-                for (let i = 0; i < files.length; i++) {
-                    if (i !== index) {
-                        dt.items.add(files[i]);
+                const updatedImages = new DataTransfer();
+                const  files  = imageInput.files;
+                const selectedToRemoveFileName = files[index].name;
+
+
+                for (let i = 0; i < images.files.length; i++) {
+                    if (selectedToRemoveFileName != images.files[i].name) {
+                        updatedImages.items.add(files[i]);
                     }
                 }
-                input.files = dt.files;
+
+                images = updatedImages;
+                imageInput.files = images.files
+                console.log(imageInput.files);
             }
+            
+            imageInput.files = images.files
         });
 
         // edit modal
         document.getElementById('image-input-edit').addEventListener('change', function(event) {
             const imagePreviewContainer = document.getElementById('image-preview-edit');
             const files = event.target.files;
-
-            // imagePreviewContainer.innerHTML = ''; // Clear previous previews
 
             const array = Array.from(files);
 
