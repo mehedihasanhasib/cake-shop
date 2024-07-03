@@ -94,6 +94,7 @@ class CakeController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        dd($request->file('updated_images'));
         // dd($request->hasFile('updated_images'));
         $request->validate([
             'name' => 'required|string|max:255',

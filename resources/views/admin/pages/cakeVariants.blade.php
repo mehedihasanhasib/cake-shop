@@ -131,13 +131,13 @@
                                                             data-variantName="{{ ucfirst(trans(strtolower($variant->variant_name))) }}"
                                                             type="button" style="padding: 8px !important;" class="btn btn-sm btn-primary m-1" data-bs-toggle="modal"
                                                             data-bs-target="#updateModal">
-                                                            <i class="fa fa-edit"></i>
+                                                            <i class="fa fa-edit fa-lg"></i>
                                                         </button>
 
                                                         <button data-id="{{ $variant->id }}" type="button"
                                                             data-bs-toggle="tooltip" style="padding: 8px !important;" class="btn btn-sm btn-danger m-1 deleteButton"
                                                         >
-                                                            <i class="fa fa-trash"></i>
+                                                            <i class="fa fa-trash fa-lg"></i>
                                                         </button>
 
                                                     </div>

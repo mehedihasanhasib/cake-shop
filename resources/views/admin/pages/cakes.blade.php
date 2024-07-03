@@ -443,12 +443,15 @@
         document.getElementById('image-input-edit').addEventListener('change', function(event) {
             const imagePreviewContainer = document.getElementById('image-preview-edit');
             const files = event.target.files;
+            const currentSelectedImages = new DataTransfer();
 
             const array = Array.from(files);
 
             array.forEach((file, index) => {
-                const reader = new FileReader(file);
 
+                currentSelectedImages.items.add(file);
+                
+                const reader = new FileReader(file);
                 reader.onload = function(e) {
 
                     const imageContainer = document.createElement('div');
