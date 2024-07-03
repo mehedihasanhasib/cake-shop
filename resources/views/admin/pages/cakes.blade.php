@@ -331,12 +331,17 @@
 
                                                 <td>
                                                     <div class="d-flex justify-content-center">
-                                                        <button type="button" style="padding: 8px !important;" class="btn btn-sm btn-primary m-1" data-bs-toggle="modal" data-bs-target="#updateCakeModal" data-cake="{{ $cake }}">
+                                                        <button type="button" style="padding: 8px !important;"
+                                                            class="btn btn-sm btn-primary m-1" data-bs-toggle="modal"
+                                                            data-bs-target="#updateCakeModal"
+                                                            data-cake="{{ $cake }}">
                                                             <i class="fa fa-edit fa-lg"></i>
                                                             {{-- Edit --}}
                                                         </button>
 
-                                                        <button data-id="{{ $cake->id }}" type="button" style="padding: 8px !important;" class="btn btn-sm btn-danger m-1 delete-button">
+                                                        <button data-id="{{ $cake->id }}" type="button"
+                                                            style="padding: 8px !important;"
+                                                            class="btn btn-sm btn-danger m-1 delete-button">
                                                             <i class="fa fa-trash fa-lg"></i>
                                                             {{-- Delete --}}
                                                         </button>
@@ -375,121 +380,133 @@
     <!-- {{-- image preview --}} -->
     <script>
         // create modal
-        let imageInput = document.getElementById('image-input')
-        let images = new DataTransfer()
+        let imageInput = document.getElementById('image-input'); // Get the image input element
+        let images = new DataTransfer(); // Initialize DataTransfer object to store images
 
         imageInput.addEventListener('change', function(event) {
-            const imagePreviewContainer = document.getElementById('image-preview');
-            const files = event.target.files;
-            const currentSelectedImages = new DataTransfer();
-            
-            const array = Array.from(files);
+            const imagePreviewContainer = document.getElementById('image-preview'); // Get the container for image previews
+            const files = event.target.files; // Get the files from the input event
+            const currentSelectedImages = new DataTransfer(); // Create a new DataTransfer object for current selected images
+
+            const array = Array.from(files); // Convert the FileList to an array
+
             array.forEach((file, index) => {
+                currentSelectedImages.items.add(file); // Add each file to currentSelectedImages
 
-                currentSelectedImages.items.add(file);
-
-                const reader = new FileReader(file);
+                const reader = new FileReader(); // Create a FileReader to read the file
                 reader.onload = function(e) {
-                    const imageContainer = document.createElement('div');
-                    imageContainer.classList.add('image-container');
+                    const imageContainer = document.createElement('div'); // Create a container div for the image
+                    imageContainer.classList.add('image-container'); // Add class to the image container
 
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.alt = file.name;
+                    const img = document.createElement('img'); // Create an img element
+                    img.src = e.target.result; // Set the src of the img element to the file data
+                    img.alt = file.name; // Set the alt attribute of the img element
 
-                    const closeButton = document.createElement('button');
-                    closeButton.innerHTML = '&times;';
-                    closeButton.classList.add('close-button');
+                    const closeButton = document.createElement('button'); // Create a button to close/remove the image
+                    closeButton.innerHTML = '&times;'; // Set the button's inner HTML to a times symbol
+                    closeButton.classList.add('close-button'); // Add class to the close button
                     closeButton.addEventListener('click', function() {
-                        imageContainer.remove();
-                        removeFile(index);
+                        imageContainer.remove(); // Remove the image container from the DOM
+                        removeFile(index); // Call removeFile to remove the file from images
                     });
 
-                    imageContainer.appendChild(img);
-                    imageContainer.appendChild(closeButton);
+                    imageContainer.appendChild(img); // Add the img element to the image container
+                    imageContainer.appendChild(closeButton); // Add the close button to the image container
 
-                    imagePreviewContainer.appendChild(imageContainer);
+                    imagePreviewContainer.appendChild(imageContainer); // Add the image container to the preview container
                 };
-                reader.readAsDataURL(file);
+                reader.readAsDataURL(file); // Read the file as a data URL
             });
-
-            // console.log(currentSelectedImages.files);
 
             for (let i = 0; i < currentSelectedImages.files.length; i++) {
-                images.items.add(currentSelectedImages.files[i])
+                images.items.add(currentSelectedImages.files[i]); // Add the current selected images to images
             }
 
             function removeFile(index) {
-                const updatedImages = new DataTransfer();
-                const  files  = imageInput.files;
-                const selectedToRemoveFileName = files[index].name;
+                let updatedImages = new DataTransfer(); // Create a new DataTransfer object for updated images
+                const filesArray = Array.from(imageInput.files); // Convert the input files to an array
+                const selectedToRemoveFileName = filesArray[index].name; // Get the name of the file to remove
 
-
-                for (let i = 0; i < images.files.length; i++) {
-                    if (selectedToRemoveFileName != images.files[i].name) {
-                        updatedImages.items.add(files[i]);
+                for (let i = 0; i < images.files.length; i++) { // Loop through images
+                    if (selectedToRemoveFileName !== images.files[i].name) { // Check if the current file is not the one to remove
+                        updatedImages.items.add(images.files[i]); // Add the file to updatedImages
                     }
                 }
 
-                images = updatedImages;
-                imageInput.files = images.files
-                console.log(imageInput.files);
+                images = updatedImages; // Reassign images to updatedImages
+                imageInput.files = images.files; // Update the input files with the new DataTransfer object
+                console.log(imageInput.files); // Log the updated files
             }
-            
-            imageInput.files = images.files
+
+            imageInput.files = images.files; // Update the input files with the updated images
         });
 
-        // edit modal
-        document.getElementById('image-input-edit').addEventListener('change', function(event) {
-            const imagePreviewContainer = document.getElementById('image-preview-edit');
-            const files = event.target.files;
-            const currentSelectedImages = new DataTransfer();
 
-            const array = Array.from(files);
+        // edit modal
+        let updatedImages = new DataTransfer(); // Initialize DataTransfer object to store updated images
+        const updateImageInput = document.getElementById('image-input-edit'); // Get the image input element
+
+        updateImageInput.addEventListener('change', function(event) {
+            const imagePreviewContainer = document.getElementById(
+            'image-preview-edit'); // Get the container for image previews
+            const files = event.target.files; // Get the files from the input event
+            const currentSelectedImages = new DataTransfer(); // Create a new DataTransfer object for current selected images
+
+            const array = Array.from(files); // Convert the FileList to an array
 
             array.forEach((file, index) => {
+                currentSelectedImages.items.add(file); // Add each file to currentSelectedImages
 
-                currentSelectedImages.items.add(file);
-                
-                const reader = new FileReader(file);
+                const reader = new FileReader(file); // Create a FileReader to read the file
                 reader.onload = function(e) {
+                    const imageContainer = document.createElement('div'); // Create a container div for the image
+                    imageContainer.classList.add('image-container'); // Add class to the image container
 
-                    const imageContainer = document.createElement('div');
-                    imageContainer.classList.add('image-container');
+                    const img = document.createElement('img'); // Create an img element
+                    img.src = e.target.result; // Set the src of the img element to the file data
+                    img.alt = file.name; // Set the alt attribute of the img element
 
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.alt = file.name;
-
-                    const closeButton = document.createElement('button');
-                    closeButton.innerHTML = '&times;';
-                    closeButton.classList.add('close-button');
+                    const closeButton = document.createElement('button'); // Create a button to close/remove the image
+                    closeButton.innerHTML = '&times;'; // Set the button's inner HTML to a times symbol
+                    closeButton.classList.add('close-button'); // Add class to the close button
                     closeButton.addEventListener('click', function() {
-                        imageContainer.remove();
-                        removeFile(index);
+                        imageContainer.remove(); // Remove the image container from the DOM
+                        removeFile(
+                        index); // Call removeFile to remove the file from updatedImages
                     });
 
-                    imageContainer.appendChild(img);
-                    imageContainer.appendChild(closeButton);
+                    imageContainer.appendChild(img); // Add the img element to the image container
+                    imageContainer.appendChild(closeButton); // Add the close button to the image container
 
-                    imagePreviewContainer.appendChild(imageContainer);
+                    imagePreviewContainer.appendChild(imageContainer); // Add the image container to the preview container
                 };
-                reader.readAsDataURL(file);
+                reader.readAsDataURL(file); // Read the file as a data URL
             });
 
+            for (let i = 0; i < currentSelectedImages.files.length; i++) {
+                updatedImages.items.add(currentSelectedImages.files[
+                i]); // Add the current selected images to updatedImages
+            }
+
             function removeFile(index) {
-                const dt = new DataTransfer();
-                const input = document.getElementById('image-input-edit');
-                const {
-                    files
-                } = input;
-                for (let i = 0; i < files.length; i++) {
-                    if (i !== index) {
-                        dt.items.add(files[i]);
+                let editUpdatedImages = new DataTransfer(); // Create a new DataTransfer object for edited images
+                const files = Array.from(updateImageInput.files); // Convert the input files to an array
+                const selectedToRemoveFileName = files[index].name; // Get the name of the file to remove
+
+                console.log(selectedToRemoveFileName); // Log the name of the file to remove
+
+                for (let i = 0; i < updatedImages.files.length; i++) { // Loop through updatedImages
+                    if (selectedToRemoveFileName !== updatedImages.files[i]
+                        .name) { // Check if the current file is not the one to remove
+                        editUpdatedImages.items.add(updatedImages.files[i]); // Add the file to editUpdatedImages
                     }
                 }
-                input.files = dt.files;
+
+                updatedImages = editUpdatedImages; // Reassign updatedImages to editUpdatedImages
+                updateImageInput.files = updatedImages.files; // Update the input files with the new DataTransfer object
             }
+
+            updateImageInput.files = updatedImages.files; // Update the input files with the updated images
         });
     </script>
 
@@ -505,11 +522,11 @@
                 let ids = [];
 
                 for (let i = 0; i < inputs.length; i++) {
-                    
+
                     if (inputs[i].name == "imagesToRemove") {
-                       ids = []
+                        ids = []
                     }
-                    
+
                 }
 
                 const cake = $(event.relatedTarget).data('cake');
@@ -549,13 +566,13 @@
                     const closeButton = document.createElement('button');
                     closeButton.innerHTML = '&times;';
                     closeButton.classList.add('close-button');
-                    
+
                     closeButton.addEventListener('click', function() {
                         imageContainer.remove();
                         ids.push(image.id)
                         input.value = JSON.stringify(ids);
                     });
-                    
+
                     form.appendChild(input)
 
                     imageContainer.appendChild(img);
@@ -576,22 +593,22 @@
 
 
         // delete
-        $('.delete-button').click(function(event){
+        $('.delete-button').click(function(event) {
             console.log(event);
             swal({
-                    title: "Are you sure?",
-                    text: "You want to delete the cake?",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                }).then((willDelete) => {
-                    if (willDelete) {
-                        const cakeId = $(this).data('id');
-                        const route = `/admin/cakes/${cakeId}`
-                        $('#deleteCakeForm').attr('action', route);
-                        $('#deleteCakeForm').submit();
-                    }
-                });
+                title: "Are you sure?",
+                text: "You want to delete the cake?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    const cakeId = $(this).data('id');
+                    const route = `/admin/cakes/${cakeId}`
+                    $('#deleteCakeForm').attr('action', route);
+                    $('#deleteCakeForm').submit();
+                }
+            });
         });
     </script>
 
