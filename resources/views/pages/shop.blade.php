@@ -59,7 +59,9 @@
                 @foreach ($cakes as $key => $cake)
                     <div class="col-lg-3 col-md-6 col-sm-6">
                         <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="{{ asset($cake->images->first()->path) }}" style="width: 240px; height: 240px; margin: auto">
+                            <a href="{{ route('shop.details', ['id' => 1]) }}">
+                                <div class="product__item__pic set-bg" data-setbg="{{ asset($cake->images->first()->path) }}" style="width: 240px; height: 240px; margin: auto">
+                            </a>
                                 <div class="product__label">
                                     <span>{{ $cake->cake_variant->variant_name }}</span>
                                 </div>
@@ -79,10 +81,7 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6">
                         <div class="shop__pagination">
-                            <a href="#">1</a>
-                            <a href="#">2</a>
-                            <a href="#">3</a>
-                            <a href="#"><span class="arrow_carrot-right"></span></a>
+                            {{ $cakes->links('vendor.pagination.bootstrap-5') }}
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6">
@@ -92,6 +91,7 @@
                     </div>
                 </div>
             </div> --}}
+            {{ $cakes->links('vendor.pagination.shop-pagination') }}
         </div>
     </section>
     <!-- Shop Section End -->

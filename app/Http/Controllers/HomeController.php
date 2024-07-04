@@ -14,7 +14,7 @@ class HomeController extends Controller
 
     public function shop()
     {
-        $cakes = Cake::orderBy('id', 'desc')->get();
+        $cakes = Cake::orderBy('id', 'desc')->paginate(12);
         return view('pages.shop', compact('cakes'));
     }
 
