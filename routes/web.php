@@ -8,10 +8,12 @@ use App\Http\Controllers\ProfileController;
 
 //home
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
+
+//shop
 Route::get('/shop', [HomeController::class, 'shop'])->name('shop');
 Route::get('/cake-details/{id}', [HomeController::class, 'singleCake'])->name('shop.details');
 
-// contact
+//contact
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 

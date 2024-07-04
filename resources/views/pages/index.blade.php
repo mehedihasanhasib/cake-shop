@@ -20,10 +20,10 @@
                 <div class="container">
                     <div class="row d-flex justify-content-center">
                         <div class="col-lg-8">
-                            {{-- <div class="hero__text">
+                            <div class="hero__text">
                                 <h2>Making your life sweeter one bite at a time!</h2>
                                 <a href="{{ asset('users/#') }}" class="primary-btn">Our cakes</a>
-                            </div> --}}
+                            </div>
                         </div>
                     </div>
                 </div>

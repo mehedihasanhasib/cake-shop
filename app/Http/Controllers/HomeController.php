@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cake;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,7 +14,8 @@ class HomeController extends Controller
 
     public function shop()
     {
-        return view('pages.shop');
+        $cakes = Cake::orderBy('id', 'desc')->get();
+        return view('pages.shop', compact('cakes'));
     }
 
     public function singleCake(string $id)
