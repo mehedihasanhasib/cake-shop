@@ -27,14 +27,14 @@
                 <div class="row">
                     <div class="col-lg-7 col-md-7">
                         <div class="shop__option__search">
-                            <form action="#">
-                                <select>
-                                    <option value="">Categories</option>
-                                    <option value="">Red Velvet</option>
-                                    <option value="">Cup Cake</option>
-                                    <option value="">Biscuit</option>
+                            <form id="search-form">
+                                <select id="search-by-category">
+                                    <option value="">Search by category</option>
+                                    @foreach ($variants as $key => $variant)
+                                        <option value="{{ $variant->slug }}">{{ $variant->variant_name }}</option>
+                                    @endforeach
                                 </select>
-                                <input type="text" placeholder="Search">
+                                <input type="text" placeholder="Search by name" id="search-by-name">
                                 <button type="submit"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
@@ -42,15 +42,13 @@
                     <div class="col-lg-5 col-md-5">
                         <div class="shop__option__right">
                             <select>
-                                {{-- <option value="">Default sorting</option> --}}
+                                <option value="">Sort By</option>
                                 <option value="">Latest</option>
                                 <option value="">Ratings</option>
                                 <option value="">Low to High</option>
                                 <option value="">High to Low</option>
                                 <option value="">Name</option>
                             </select>
-                            <a href="#"><i class="fa fa-list"></i></a>
-                            <a href="#"><i class="fa fa-reorder"></i></a>
                         </div>
                     </div>
                 </div>
@@ -60,7 +58,8 @@
                     <div class="col-lg-3 col-md-6 col-sm-6">
                         <div class="product__item">
                             <a href="{{ route('shop.details', ['id' => 1]) }}">
-                                <div class="product__item__pic set-bg" data-setbg="{{ asset($cake->images->first()->path) }}" style="width: 240px; height: 240px; margin: auto">
+                                {{-- this image div is little bit diffrent --}}
+                                <div class="product__item__pic set-bg" data-setbg="{{ asset($cake->images->first()->path) }}">
                             </a>
                                 <div class="product__label">
                                     <span>{{ $cake->cake_variant->variant_name }}</span>
@@ -68,7 +67,7 @@
                             </div>
                             <div class="product__item__text">
                                 <h6><a href="{{ route('shop.details', ['id' => 1]) }}">{{ $cake->name }}</a></h6>
-                                <div class="product__item__price">${{ $cake->price }}</div>
+                                <div class="product__item__price">&#2547; {{ $cake->price }}</div>
                                 <div class="cart_add">
                                     <a href="#">Add to cart</a>
                                 </div>
@@ -95,4 +94,19 @@
         </div>
     </section>
     <!-- Shop Section End -->
+@endsection
+
+@section('script')
+    <script src="{{ URL::asset('admin/assets/js/core/jquery-3.7.1.min.js') }}"></script>
+    <script>
+
+        // const select = document.getElementById('search-by-category')
+        // select.addEventListener('change', function(event){
+        //     console.log(this);
+        // })
+
+        $('.shop__option__search form .nice-select').on('click', function(event){
+            console.log(event);
+        })
+    </script>
 @endsection

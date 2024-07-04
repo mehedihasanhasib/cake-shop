@@ -12,6 +12,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 //shop
 Route::get('/shop', [HomeController::class, 'shop'])->name('shop');
 Route::get('/cake-details/{id}', [HomeController::class, 'singleCake'])->name('shop.details');
+Route::get('/shop/{slug}', [HomeController::class, 'search_by_category'])->name('shop.search_by_category');
 
 //contact
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');

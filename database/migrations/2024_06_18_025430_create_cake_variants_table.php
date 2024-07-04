@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('cake_variants', function (Blueprint $table) {
             $table->id();
             $table->string('variant_name');
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }

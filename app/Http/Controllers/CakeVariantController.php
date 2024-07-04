@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CakeVariant;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -36,12 +37,14 @@ class CakeVariantController extends Controller
     {
         $validated_data = $request->validate(
             [
-                'variant_name' => 'required|string|max:255'
+                'variant_name' => 'required|string|max:255|unique:cake_variants,variant_name'
             ],
             [
                 'variant_name.required' => 'Variant name field can\'t be null'
             ]
         );
+
+        $validated_data['slug'] = strtolower($request->variant_name) . '-' . Str::random(5);
 
         try {
             CakeVariant::create($validated_data);

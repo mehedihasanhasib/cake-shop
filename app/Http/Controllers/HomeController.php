@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cake;
+use App\Models\CakeVariant;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -15,7 +16,8 @@ class HomeController extends Controller
     public function shop()
     {
         $cakes = Cake::orderBy('id', 'desc')->paginate(12);
-        return view('pages.shop', compact('cakes'));
+        $variants = CakeVariant::all();
+        return view('pages.shop', compact('cakes', 'variants'));
     }
 
     public function singleCake(string $id)
