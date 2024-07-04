@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app' , ['title'=>'Shop'])
 @section('content')
     <!-- Breadcrumb Begin -->
     <div class="breadcrumb-option">
@@ -54,7 +54,9 @@
                 </div>
             </div>
             <div class="row">
-                @foreach ($cakes as $key => $cake)
+
+                @if ($cakes)
+                    @foreach ($cakes as $key => $cake)
                     <div class="col-lg-3 col-md-6 col-sm-6">
                         <div class="product__item">
                             <a href="{{ route('shop.details', ['id' => 1]) }}">
@@ -74,7 +76,37 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+                    @endforeach
+                
+                @elseif ($filtered_by_category)
+
+                    @foreach ($cakes as $key => $cake)
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="product__item">
+                            <a href="{{ route('shop.details', ['id' => 1]) }}">
+                                {{-- this image div is little bit diffrent --}}
+                                <div class="product__item__pic set-bg" data-setbg="{{ asset($cake->images->first()->path) }}">
+                            </a>
+                                <div class="product__label">
+                                    <span>{{ $cake->cake_variant->variant_name }}</span>
+                                </div>
+                            </div>
+                            <div class="product__item__text">
+                                <h6><a href="{{ route('shop.details', ['id' => 1]) }}">{{ $cake->name }}</a></h6>
+                                <div class="product__item__price">&#2547; {{ $cake->price }}</div>
+                                <div class="cart_add">
+                                    <a href="#">Add to cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+
+                @endif
+
+
+
+               
             </div>
             {{-- <div class="shop__last__option">
                 <div class="row">
@@ -99,14 +131,13 @@
 @section('script')
     <script src="{{ URL::asset('admin/assets/js/core/jquery-3.7.1.min.js') }}"></script>
     <script>
+        $(document).on('click', '.nice-select .list .option', function(event) {
+            const slug = $(this).data('value');
+            const searchForm = $('#search-form')
+            const route = `/shop/${slug}`;
+            searchForm.attr('action', route)
+            searchForm.submit();
 
-        // const select = document.getElementById('search-by-category')
-        // select.addEventListener('change', function(event){
-        //     console.log(this);
-        // })
-
-        $('.shop__option__search form .nice-select').on('click', function(event){
-            console.log(event);
-        })
+        });
     </script>
 @endsection

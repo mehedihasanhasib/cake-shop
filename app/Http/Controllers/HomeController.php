@@ -12,16 +12,4 @@ class HomeController extends Controller
     {
         return view('pages.index');
     }
-
-    public function shop()
-    {
-        $cakes = Cake::orderBy('id', 'desc')->paginate(12);
-        $variants = CakeVariant::all();
-        return view('pages.shop', compact('cakes', 'variants'));
-    }
-
-    public function singleCake(string $id)
-    {
-        return view('pages.singleCake');
-    }
 }

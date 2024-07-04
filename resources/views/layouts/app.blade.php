@@ -7,7 +7,7 @@
     <meta name="keywords" content="Cake, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cake Shop</title>
+    <title>{{ $title ?? null }}</title>
 
     <link rel="icon" href="{{ asset('favicon.png') }}" type="image/x-icon" />
 

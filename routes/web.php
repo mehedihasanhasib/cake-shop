@@ -5,14 +5,15 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ShopController;
 
 //home
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 //shop
-Route::get('/shop', [HomeController::class, 'shop'])->name('shop');
-Route::get('/cake-details/{id}', [HomeController::class, 'singleCake'])->name('shop.details');
-Route::get('/shop/{slug}', [HomeController::class, 'search_by_category'])->name('shop.search_by_category');
+Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+Route::get('/cake-details/{id}', [ShopController::class, 'singleCake'])->name('shop.details');
+Route::get('/shop/{slug}', [ShopController::class, 'search_by_category'])->name('shop.search_by_category');
 
 //contact
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
