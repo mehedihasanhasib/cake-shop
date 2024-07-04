@@ -120,7 +120,7 @@
                             <div class="d-flex align-items-center">
                                 <h4 class="card-title">Cakes</h4>
                                 <button class="btn btn-primary btn-round ms-auto" data-bs-toggle="modal"
-                                    data-bs-target="#createCakeModal">
+                                        data-bs-target="#createCakeModal">
                                     <i class="fa fa-plus"></i>
                                     Add Cake
                                 </button>
@@ -129,7 +129,7 @@
                         <div class="card-body">
                             <!-- {{-- cake create Modal --}} -->
                             <div class="modal fade modal-lg" id="createCakeModal" tabindex="-1" role="dialog"
-                                aria-hidden="true">
+                                 aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header border-0">
@@ -138,18 +138,18 @@
                                                 <span class="fw-mediumbold"> Cake </span>
                                             </h5>
                                             <button type="button" class="close" data-bs-dismiss="modal"
-                                                aria-label="Close">
+                                                    aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body">
                                             <form id="createCakeForm" action="{{ route('cakes.store') }}" method="POST"
-                                                enctype="multipart/form-data">
+                                                  enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="form-group">
                                                     <input type="text" class="form-control form-control-lg"
-                                                        placeholder="Cake Name" name="name"
-                                                        value="{{ old('name') ?? null }}">
+                                                           placeholder="Cake Name" name="name"
+                                                           value="{{ old('name') ?? null }}">
                                                     @error('name')
                                                         <span style="color: red">{{ $message }}</span>
                                                     @enderror
@@ -180,8 +180,8 @@
                                                 <div id="image-preview"></div>
                                                 <div class="form-group">
                                                     <input id="image-input" type="file"
-                                                        class="form-control form-control-lg" name="images[]"
-                                                        accept="image/jpg, image/jpeg, image/png" multiple>
+                                                           class="form-control form-control-lg" name="images[]"
+                                                           accept="image/jpg, image/jpeg, image/png" multiple>
                                                     @error('images*')
                                                         <span style="color: red">{{ $message }}</span>
                                                     @enderror
@@ -189,8 +189,8 @@
 
                                                 <div class="form-group">
                                                     <input type="number" class="form-control form-control-lg"
-                                                        name="price" placeholder="Price"
-                                                        value="{{ old('price') ?? null }}">
+                                                           name="price" placeholder="Price"
+                                                           value="{{ old('price') ?? null }}">
                                                     @error('price')
                                                         <span style="color: red">{{ $message }}</span>
                                                     @enderror
@@ -212,7 +212,7 @@
 
                             <!-- {{-- edit modal --}} -->
                             <div class="modal fade modal-lg" id="updateCakeModal" tabindex="-1" role="dialog"
-                                aria-hidden="true">
+                                 aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header border-0">
@@ -221,7 +221,7 @@
                                                 <span class="fw-mediumbold"> Cake </span>
                                             </h5>
                                             <button type="button" class="close" data-bs-dismiss="modal"
-                                                aria-label="Close">
+                                                    aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
@@ -232,15 +232,15 @@
 
                                                 <div class="form-group">
                                                     <input type="text" class="form-control form-control-lg"
-                                                        id="name" placeholder="Cake Name" name="name"
-                                                        value="{{ old('name') ?? null }}">
+                                                           id="name" placeholder="Cake Name" name="name"
+                                                           value="{{ old('name') ?? null }}">
                                                     @error('name')
                                                         <span style="color: red">{{ $message }}</span>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <select id="variant" name="cake_variant_id"
-                                                        class="form-select form-select-lg">
+                                                            class="form-select form-select-lg">
                                                         <option value="{{ null }}">Select Variant</option>
                                                         @foreach ($variants as $variant)
                                                             <option value="{{ $variant->id }}">
@@ -256,8 +256,8 @@
                                                 <div id="image-preview-edit"></div>
                                                 <div class="form-group">
                                                     <input id="image-input-edit" type="file"
-                                                        class="form-control form-control-lg" name="updated_images[]"
-                                                        accept="image/jpg, image/jpeg, image/png" multiple>
+                                                           class="form-control form-control-lg" name="updated_images[]"
+                                                           accept="image/jpg, image/jpeg, image/png" multiple>
                                                     @error('updated_images*')
                                                         <span style="color: red">{{ $message }}</span>
                                                     @enderror
@@ -265,8 +265,8 @@
 
                                                 <div class="form-group">
                                                     <input id="price" type="number"
-                                                        class="form-control form-control-lg" name="price"
-                                                        placeholder="Price" value="{{ old('price') ?? null }}">
+                                                           class="form-control form-control-lg" name="price"
+                                                           placeholder="Price" value="{{ old('price') ?? null }}">
                                                     @error('price')
                                                         <span style="color: red">{{ $message }}</span>
                                                     @enderror
@@ -317,8 +317,8 @@
                                                     @foreach ($cake->images as $image)
                                                         <div class="image-container2">
                                                             <img class="cake-image" data-path="{{ asset($image->path) }}"
-                                                                src="{{ asset($image->path) }}" alt="image"
-                                                                width="55" height="55" style="cursor: pointer">
+                                                                 src="{{ asset($image->path) }}" alt="image"
+                                                                 width="55" height="55" style="cursor: pointer">
                                                         </div>
                                                     @endforeach
                                                 </td>
@@ -332,16 +332,16 @@
                                                 <td>
                                                     <div class="d-flex justify-content-center">
                                                         <button type="button" style="padding: 8px !important;"
-                                                            class="btn btn-sm btn-primary m-1" data-bs-toggle="modal"
-                                                            data-bs-target="#updateCakeModal"
-                                                            data-cake="{{ $cake }}">
+                                                                class="btn btn-sm btn-primary m-1" data-bs-toggle="modal"
+                                                                data-bs-target="#updateCakeModal"
+                                                                data-cake="{{ $cake }}">
                                                             <i class="fa fa-edit fa-lg"></i>
                                                             {{-- Edit --}}
                                                         </button>
 
                                                         <button data-id="{{ $cake->id }}" type="button"
-                                                            style="padding: 8px !important;"
-                                                            class="btn btn-sm btn-danger m-1 delete-button">
+                                                                style="padding: 8px !important;"
+                                                                class="btn btn-sm btn-danger m-1 delete-button">
                                                             <i class="fa fa-trash fa-lg"></i>
                                                             {{-- Delete --}}
                                                         </button>
@@ -384,9 +384,11 @@
         let images = new DataTransfer(); // Initialize DataTransfer object to store images
 
         imageInput.addEventListener('change', function(event) {
-            const imagePreviewContainer = document.getElementById('image-preview'); // Get the container for image previews
+            const imagePreviewContainer = document.getElementById(
+                'image-preview'); // Get the container for image previews
             const files = event.target.files; // Get the files from the input event
-            const currentSelectedImages = new DataTransfer(); // Create a new DataTransfer object for current selected images
+            const currentSelectedImages =
+                new DataTransfer(); // Create a new DataTransfer object for current selected images
 
             const array = Array.from(files); // Convert the FileList to an array
 
@@ -395,25 +397,29 @@
 
                 const reader = new FileReader(); // Create a FileReader to read the file
                 reader.onload = function(e) {
-                    const imageContainer = document.createElement('div'); // Create a container div for the image
+                    const imageContainer = document.createElement(
+                        'div'); // Create a container div for the image
                     imageContainer.classList.add('image-container'); // Add class to the image container
 
                     const img = document.createElement('img'); // Create an img element
                     img.src = e.target.result; // Set the src of the img element to the file data
                     img.alt = file.name; // Set the alt attribute of the img element
 
-                    const closeButton = document.createElement('button'); // Create a button to close/remove the image
+                    const closeButton = document.createElement(
+                        'button'); // Create a button to close/remove the image
                     closeButton.innerHTML = '&times;'; // Set the button's inner HTML to a times symbol
                     closeButton.classList.add('close-button'); // Add class to the close button
                     closeButton.addEventListener('click', function() {
                         imageContainer.remove(); // Remove the image container from the DOM
-                        removeFile(index); // Call removeFile to remove the file from images
+                        removeFile(file); // Call removeFile to remove the file from images
                     });
 
                     imageContainer.appendChild(img); // Add the img element to the image container
-                    imageContainer.appendChild(closeButton); // Add the close button to the image container
+                    imageContainer.appendChild(
+                        closeButton); // Add the close button to the image container
 
-                    imagePreviewContainer.appendChild(imageContainer); // Add the image container to the preview container
+                    imagePreviewContainer.appendChild(
+                        imageContainer); // Add the image container to the preview container
                 };
                 reader.readAsDataURL(file); // Read the file as a data URL
             });
@@ -422,13 +428,14 @@
                 images.items.add(currentSelectedImages.files[i]); // Add the current selected images to images
             }
 
-            function removeFile(index) {
+            function removeFile(file) {
                 let updatedImages = new DataTransfer(); // Create a new DataTransfer object for updated images
                 const filesArray = Array.from(imageInput.files); // Convert the input files to an array
-                const selectedToRemoveFileName = filesArray[index].name; // Get the name of the file to remove
+                const selectedToRemoveFileName = file.name; // Get the name of the file to remove
 
                 for (let i = 0; i < images.files.length; i++) { // Loop through images
-                    if (selectedToRemoveFileName !== images.files[i].name) { // Check if the current file is not the one to remove
+                    if (selectedToRemoveFileName !== images.files[i]
+                        .name) { // Check if the current file is not the one to remove
                         updatedImages.items.add(images.files[i]); // Add the file to updatedImages
                     }
                 }
@@ -450,60 +457,73 @@
             const imagePreviewContainer = document.getElementById(
             'image-preview-edit'); // Get the container for image previews
             const files = event.target.files; // Get the files from the input event
-            const currentSelectedImages = new DataTransfer(); // Create a new DataTransfer object for current selected images
+            const currentSelectedImages =
+                new DataTransfer(); // Create a new DataTransfer object for current selected images
 
             const array = Array.from(files); // Convert the FileList to an array
 
             array.forEach((file, index) => {
-                currentSelectedImages.items.add(file); // Add each file to currentSelectedImages
 
+
+                currentSelectedImages.items.add(file); // Add each file to currentSelectedImages
                 const reader = new FileReader(file); // Create a FileReader to read the file
                 reader.onload = function(e) {
-                    const imageContainer = document.createElement('div'); // Create a container div for the image
-                    imageContainer.classList.add('image-container'); // Add class to the image container
+                    const imageContainer = document.createElement(
+                        'div'); // Create a container div for the image
+                    imageContainer.classList.add(
+                        'image-container'); // Add class to the image container
 
                     const img = document.createElement('img'); // Create an img element
-                    img.src = e.target.result; // Set the src of the img element to the file data
+                    img.src = e.target
+                        .result; // Set the src of the img element to the file data
                     img.alt = file.name; // Set the alt attribute of the img element
 
-                    const closeButton = document.createElement('button'); // Create a button to close/remove the image
-                    closeButton.innerHTML = '&times;'; // Set the button's inner HTML to a times symbol
+                    const closeButton = document.createElement(
+                        'button'); // Create a button to close/remove the image
+                    closeButton.innerHTML =
+                        '&times;'; // Set the button's inner HTML to a times symbol
                     closeButton.classList.add('close-button'); // Add class to the close button
                     closeButton.addEventListener('click', function() {
-                        imageContainer.remove(); // Remove the image container from the DOM
-                        removeFile(
-                        index); // Call removeFile to remove the file from updatedImages
+                        imageContainer
+                            .remove(); // Remove the image container from the DOM
+                        removeFile(file); // Call removeFile to remove the file from updatedImages
                     });
 
-                    imageContainer.appendChild(img); // Add the img element to the image container
-                    imageContainer.appendChild(closeButton); // Add the close button to the image container
+                    imageContainer.appendChild(
+                        img); // Add the img element to the image container
+                    imageContainer.appendChild(
+                        closeButton); // Add the close button to the image container
 
-                    imagePreviewContainer.appendChild(imageContainer); // Add the image container to the preview container
+                    imagePreviewContainer.appendChild(
+                        imageContainer); // Add the image container to the preview container
                 };
                 reader.readAsDataURL(file); // Read the file as a data URL
+
+
+
             });
 
             for (let i = 0; i < currentSelectedImages.files.length; i++) {
                 updatedImages.items.add(currentSelectedImages.files[
-                i]); // Add the current selected images to updatedImages
+                    i]); // Add the current selected images to updatedImages
             }
 
-            function removeFile(index) {
+            function removeFile(file) {
                 let editUpdatedImages = new DataTransfer(); // Create a new DataTransfer object for edited images
                 const files = Array.from(updateImageInput.files); // Convert the input files to an array
-                const selectedToRemoveFileName = files[index].name; // Get the name of the file to remove
+                const selectedToRemoveFileName = file.name; // Get the name of the file to remove
 
                 console.log(selectedToRemoveFileName); // Log the name of the file to remove
 
                 for (let i = 0; i < updatedImages.files.length; i++) { // Loop through updatedImages
-                    if (selectedToRemoveFileName !== updatedImages.files[i]
-                        .name) { // Check if the current file is not the one to remove
+                    if (selectedToRemoveFileName !== updatedImages.files[i].name) { // Check if the current file is not the one to remove
                         editUpdatedImages.items.add(updatedImages.files[i]); // Add the file to editUpdatedImages
                     }
                 }
 
                 updatedImages = editUpdatedImages; // Reassign updatedImages to editUpdatedImages
-                updateImageInput.files = updatedImages.files; // Update the input files with the new DataTransfer object
+                updateImageInput.files = updatedImages
+                    .files; // Update the input files with the new DataTransfer object
             }
 
             updateImageInput.files = updatedImages.files; // Update the input files with the updated images
