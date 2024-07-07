@@ -23,6 +23,10 @@ class ShopController extends Controller
     public function search_by_category(string $slug)
     {
         $variant = CakeVariant::where('slug', $slug)->first();
-        dd($variant->cakes);
+        $filtered_cakes = $variant->cakes;
+        $variants = CakeVariant::all();
+
+        // dd($variant-);
+        return view('pages.shop_category', compact('filtered_cakes', 'variants', 'variant'));
     }
 }

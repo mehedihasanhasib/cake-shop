@@ -40,11 +40,12 @@ class CakeVariantController extends Controller
                 'variant_name' => 'required|string|max:255|unique:cake_variants,variant_name'
             ],
             [
-                'variant_name.required' => 'Variant name field can\'t be null'
+                'variant_name.required' => 'Variant name field can\'t be null',
+                'variant_name.unique' => "\"{$request->variant_name}\" already exists"
             ]
         );
 
-        $validated_data['slug'] = strtolower($request->variant_name) . '-' . Str::random(5);
+        $validated_data['slug'] = strtolower($request->variant_name);
 
         try {
             CakeVariant::create($validated_data);
