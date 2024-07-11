@@ -9,6 +9,7 @@
                         @endif
                         @foreach ($variants as $key => $variant)
                             @if (isset($selected_variant))
+                                <option value="">All</option>
                                 <option {{ $selected_variant == $variant->variant_name ? 'selected' : null }} value="{{ $variant->slug }}">{{ $variant->variant_name }}</option>                
                             @else
                                 <option value="{{ $variant->slug }}">{{ $variant->variant_name }}</option>

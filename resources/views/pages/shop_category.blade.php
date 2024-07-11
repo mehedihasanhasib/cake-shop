@@ -74,11 +74,18 @@
     <script>
         $(document).on('click', '.nice-select .list .option', function(event) {
             const slug = $(this).data('value');
-            const searchForm = $('#search-form')
-            const route = `/shop/${slug}`;
-            searchForm.attr('action', route)
-            searchForm.submit();
-
+            if (slug) {
+                const searchForm = $('#search-form')
+                const route = `/shop/${slug}`;
+                searchForm.attr('action', route)
+                searchForm.submit(); 
+            } else {
+                const searchForm = $('#search-form')
+                const route = `/shop/${slug}`;
+                searchForm.attr('action', route)
+                searchForm.submit(); 
+            }
+            
         });
     </script>
 @endsection
