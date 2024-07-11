@@ -69,23 +69,15 @@
     <!-- Shop Section End -->
 @endsection
 
-@section('script')
+{{-- @section('script')
     <script src="{{ URL::asset('admin/assets/js/core/jquery-3.7.1.min.js') }}"></script>
     <script>
         $(document).on('click', '.nice-select .list .option', function(event) {
             const slug = $(this).data('value');
-            if (slug) {
-                const searchForm = $('#search-form')
-                const route = `/shop/${slug}`;
-                searchForm.attr('action', route)
-                searchForm.submit(); 
-            } else {
-                const searchForm = $('#search-form')
-                const route = `/shop/${slug}`;
-                searchForm.attr('action', route)
-                searchForm.submit(); 
-            }
-            
+            const searchForm = $('#search-form')
+            const route = `/shop/${slug}`;
+            searchForm.attr('action', route)
+            searchForm.submit(); 
         });
     </script>
-@endsection
+@endsection --}}

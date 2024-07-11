@@ -74,14 +74,10 @@
             <div class="col-lg-12">
                 <nav class="header__menu mobile-menu">
                     <ul>
-                        <li class={{ Route::is('home.index') ? 'active' : null }}><a
-                                href="{{ route('home.index') }}">Home</a></li>
-                        <li class={{ Route::is('shop') ? 'active' : null }}><a href="{{ route('shop') }}">Shop</a>
-                        </li>
-                        <li class={{ Route::is('cart') ? 'active' : null }}><a href="{{ route('cart') }}">Cart</a>
-                        </li>
-                        <li class={{ Route::is('contact') ? 'active' : null }}><a
-                                href="{{ route('contact') }}">Contact</a></li>
+                        <li class={{ Route::is('home.index') ? 'active' : null }}><a href="{{ route('home.index') }}">Home</a></li>
+                        <li class={{ Route::is('shop') || Route::is('shop.search_by_category') ? 'active' : null }}><a href="{{ route('shop') }}">Shop</a></li>
+                        <li class={{ Route::is('cart') ? 'active' : null }}><a href="{{ route('cart') }}">Cart</a></li>
+                        <li class={{ Route::is('contact') ? 'active' : null }}><a href="{{ route('contact') }}">Contact</a></li>
                     </ul>
                 </nav>
             </div>

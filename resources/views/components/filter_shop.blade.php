@@ -4,13 +4,10 @@
             <div class="shop__option__search">
                 <form id="search-form">
                     <select id="search-by-category">
-                        @if (!isset($selected_variant))
-                            <option value="">{{ $selected_variant ?? 'Search by category' }}</option>
-                        @endif
+                        <option value="">All</option>
                         @foreach ($variants as $key => $variant)
                             @if (isset($selected_variant))
-                                <option value="">All</option>
-                                <option {{ $selected_variant == $variant->variant_name ? 'selected' : null }} value="{{ $variant->slug }}">{{ $variant->variant_name }}</option>                
+                                <option data-category="true" {{ $selected_variant == $variant->variant_name ? 'selected' : null }} value="{{ $variant->slug }}">{{ $variant->variant_name }}</option>                
                             @else
                                 <option value="{{ $variant->slug }}">{{ $variant->variant_name }}</option>
                             @endif
@@ -25,13 +22,30 @@
             <div class="shop__option__right">
                 <select>
                     <option value="">Sort By</option>
-                    <option value="">Latest</option>
-                    <option value="">Ratings</option>
-                    <option value="">Low to High</option>
-                    <option value="">High to Low</option>
-                    <option value="">Name</option>
+                    <option value="latest">Latest</option>
+                    <option value="ratings">Ratings</option>
+                    <option value="low_to_high">Low to High</option>
+                    <option value="high_to_low">High to Low</option>
+                    <option value="name">Name</option>
                 </select>
             </div>
         </div>
     </div>
 </div>
+
+@section('script')
+    <script src="{{ URL::asset('admin/assets/js/core/jquery-3.7.1.min.js') }}"></script>
+    <script>
+        $(document).on('click', '.nice-select .list .option', function(event) {
+            console.log($(this));
+            // return false;
+            
+                const slug = $(this).data('value');
+                const searchForm = $('#search-form')
+                const route = `/shop/${slug}`;
+                searchForm.attr('action', route)
+                searchForm.submit(); 
+          
+        });
+    </script>
+@endsection
